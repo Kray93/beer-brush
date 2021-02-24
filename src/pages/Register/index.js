@@ -11,9 +11,11 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import './style.css'
 
-function Login() {
+function Register() {
     const useStyles = makeStyles((theme) => ({
         root: {
             display: 'flex',
@@ -37,6 +39,7 @@ function Login() {
         },
     }));
     const classes = useStyles();
+    const [user, setUser] = React.useState('');
     const [values, setValues] = React.useState({
         password: '',
         weight: '',
@@ -46,6 +49,9 @@ function Login() {
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
     };
+    const handleUserChange = (event) => {
+        setUser(event.target.value);
+      };
 
     const handleClickShowPassword = () => {
         setValues({ ...values, showPassword: !values.showPassword });
@@ -58,10 +64,22 @@ function Login() {
         <>
             <CssBaseline />
             <Container className="container" maxWidth="xs">
-                <h5>Login</h5>
+                <h5>Registration</h5>
                 <Grid container direction="column"
                     justify="center"
                     alignItems="center" spacing={1}>
+                    <Grid item xs={6}>
+                        <FormControl>
+                            <InputLabel htmlFor="my-input">First Name</InputLabel>
+                            <Input id="my-input" aria-describedby="my-helper-text" />
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <FormControl>
+                            <InputLabel htmlFor="my-input">Last Name</InputLabel>
+                            <Input id="my-input" aria-describedby="my-helper-text" />
+                        </FormControl>
+                    </Grid>
                     <Grid item xs={6}>
                         <FormControl>
                             <InputLabel htmlFor="my-input">Email address</InputLabel>
@@ -90,10 +108,25 @@ function Login() {
                             />
                         </FormControl>
                     </Grid>
+                    <Grid item xs={6}>
+                        <FormControl className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-label">User Type</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={user}
+                                onChange={handleUserChange}
+                            >
+                                <MenuItem value="Instructor">Instructor</MenuItem>
+                                <MenuItem value="Student">Student</MenuItem>
+                                <MenuItem value="User">User</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Grid>
                 </Grid>
             </Container>
         </>
     )
 }
 
-export default Login;
+export default Register;
