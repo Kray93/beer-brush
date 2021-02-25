@@ -11,6 +11,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Button from '@material-ui/core/Button';
 import './style.css'
 
 function Login() {
@@ -89,6 +90,10 @@ function Login() {
                                 }
                             />
                         </FormControl>
+                    </Grid>
+                    <Grid>
+                    <Button variant="contained" spacing={1}>Home</Button>
+                    <Button variant="contained">Login</Button>
                     </Grid>
                 </Grid>
             </Container>

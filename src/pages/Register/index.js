@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
+import Axios from 'axios';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
 import './style.css'
 
 function Register() {
@@ -39,22 +42,38 @@ function Register() {
         },
     }));
     const classes = useStyles();
-    const [user, setUser] = React.useState('');
-    const [values, setValues] = React.useState({
+    const history = useHistory();
+    const [first, setFirst] = useState();
+    const [last, setLast] = useState();
+    const [email, setEmail] = useState();
+    const [user, setUser] = useState('');
+    const [password, setPassword] = useState({
         password: '',
         weight: '',
         weightRange: '',
         showPassword: false,
     });
+    const handleSubmit = e => {
+        e.preventDefault();
+        console.log(first, last, email, password, user);
+        Axios.get(`http://localhost:3001/check_login`)
+        .then((res,err) => {
+            if (res.status===200) {
+              history.push(`/login`)
+            } else {
+              return (err)  
+            }
+        });
+    };
     const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
+        setPassword({ ...password, [prop]: event.target.value });
     };
     const handleUserChange = (event) => {
         setUser(event.target.value);
-      };
+    };
 
     const handleClickShowPassword = () => {
-        setValues({ ...values, showPassword: !values.showPassword });
+        setPassword({ ...password, showPassword: !password.showPassword });
     };
 
     const handleMouseDownPassword = (event) => {
@@ -63,68 +82,72 @@ function Register() {
     return (
         <>
             <CssBaseline />
-            <Container className="container" maxWidth="xs">
-                <h5>Registration</h5>
-                <Grid container direction="column"
-                    justify="center"
-                    alignItems="center" spacing={1}>
-                    <Grid item xs={6}>
-                        <FormControl>
-                            <InputLabel htmlFor="my-input">First Name</InputLabel>
-                            <Input id="my-input" aria-describedby="my-helper-text" />
-                        </FormControl>
+            <form onSubmit={handleSubmit}>
+                <Container className="container" maxWidth="xs">
+                    <h5>Registration</h5>
+                    <Grid container direction="column"
+                        justify="center"
+                        alignItems="center" spacing={1}>
+                        <Grid item xs={6}>
+                            <FormControl>
+                                <InputLabel htmlFor="my-input">First Name</InputLabel>
+                                <Input onChange={e => setFirst(e.target.value)} id="my-input" aria-describedby="my-helper-text" />
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <FormControl>
+                                <InputLabel htmlFor="my-input">Last Name</InputLabel>
+                                <Input onChange={e => setLast(e.target.value)} id="my-input" aria-describedby="my-helper-text" />
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <FormControl>
+                                <InputLabel htmlFor="my-input">Email address</InputLabel>
+                                <Input onChange={e => setEmail(e.target.value)} id="my-input" aria-describedby="my-helper-text" />
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <FormControl className={clsx(classes.margin, classes.textField)}>
+                                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                                <Input
+                                    id="standard-adornment-password"
+                                    type={password.showPassword ? 'text' : 'password'}
+                                    value={password.password}
+                                    onChange={handleChange('password')}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                            >
+                                                {password.showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <FormControl className={classes.formControl}>
+                                <InputLabel id="demo-simple-select-label">User Type</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={user}
+                                    onChange={handleUserChange}
+                                >
+                                    <MenuItem value="Instructor">Instructor</MenuItem>
+                                    <MenuItem value="Student">Student</MenuItem>
+                                    <MenuItem value="User">User</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Button variant="contained" spacing={1}>Back to Login</Button>
+                        <Button type="submit" variant="contained">Register</Button>
                     </Grid>
-                    <Grid item xs={6}>
-                        <FormControl>
-                            <InputLabel htmlFor="my-input">Last Name</InputLabel>
-                            <Input id="my-input" aria-describedby="my-helper-text" />
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <FormControl>
-                            <InputLabel htmlFor="my-input">Email address</InputLabel>
-                            <Input id="my-input" aria-describedby="my-helper-text" />
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <FormControl className={clsx(classes.margin, classes.textField)}>
-                            <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                            <Input
-                                id="standard-adornment-password"
-                                type={values.showPassword ? 'text' : 'password'}
-                                value={values.password}
-                                onChange={handleChange('password')}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                        >
-                                            {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                            />
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <FormControl className={classes.formControl}>
-                            <InputLabel id="demo-simple-select-label">User Type</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={user}
-                                onChange={handleUserChange}
-                            >
-                                <MenuItem value="Instructor">Instructor</MenuItem>
-                                <MenuItem value="Student">Student</MenuItem>
-                                <MenuItem value="User">User</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Grid>
-                </Grid>
-            </Container>
+                </Container>
+            </form>
         </>
     )
 }
