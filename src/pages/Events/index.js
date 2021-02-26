@@ -4,12 +4,12 @@ import 'date-fns';
 import Navbar from '../../components/Navbar'
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import DateFnsUtils from '@date-io/date-fns';
 import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,
 } from '@material-ui/pickers';
+import Upcoming from '../../components/Upcoming';
 
 
 
@@ -25,7 +25,7 @@ function Events() {
     };
     return (
         <>
-            {/* <Navbar /> */}
+            <Navbar />
             <Container className="container">
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <Grid container justify="space-around">
@@ -42,6 +42,9 @@ function Events() {
                                 'aria-label': 'change date',
                             }}
                         />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Upcoming/>       
                     </Grid>
                 </MuiPickersUtilsProvider>
             </Container>
