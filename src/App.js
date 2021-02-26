@@ -1,12 +1,19 @@
+import React from 'react'
+import { HashRouter as Router, Route } from "react-router-dom"
 import './App.css';
+import Login from './pages/Login';
+import Register from "./pages/Register"
 import Home from "./pages/Home/index"
 
 function App() {
   return (
-    <>
-    <Home/>
-    </>
-
+    <Router>
+    <div className="App">
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/register" component={Register} />
+      <Route exact path="/home" component={Home} />
+    </div>
+    </Router>
   );
 }
 
