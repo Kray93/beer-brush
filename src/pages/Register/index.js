@@ -46,30 +46,36 @@ function Register() {
     const [first, setFirst] = useState();
     const [last, setLast] = useState();
     const [email, setEmail] = useState();
-    const [user, setUser] = useState('');
+    const [userName, setUserName] = useState();
+    const [userType, setUserType] = useState('');
     const [password, setPassword] = useState({
         password: '',
-        weight: '',
-        weightRange: '',
         showPassword: false,
     });
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(first, last, email, password, user);
-        Axios.get(`http://localhost:3001/check_login`)
-        .then((res,err) => {
-            if (res.status===200) {
+        console.log(first, last, email, password, userName, userType);
+        const userData = {
+            fname:first,
+            lname:last,
+            email:email,
+            pw:password.password,
+            uname:userName
+        }
+        Axios.post(`http://localhost:3001/api/user/register`,userData)
+        .then((res) => {
+            console.log(res);
               history.push(`/login`)
-            } else {
-              return (err)  
-            }
+            
+        }).catch(err=>{
+            console.log(err);
         });
     };
     const handleChange = (prop) => (event) => {
         setPassword({ ...password, [prop]: event.target.value });
     };
     const handleUserChange = (event) => {
-        setUser(event.target.value);
+        setUserType(event.target.value);
     };
 
     const handleClickShowPassword = () => {
@@ -107,6 +113,12 @@ function Register() {
                             </FormControl>
                         </Grid>
                         <Grid item xs={6}>
+                            <FormControl>
+                                <InputLabel htmlFor="my-input">Username</InputLabel>
+                                <Input onChange={e => setUserName(e.target.value)} id="my-input" aria-describedby="my-helper-text" />
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={6}>
                             <FormControl className={clsx(classes.margin, classes.textField)}>
                                 <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                                 <Input
@@ -134,16 +146,15 @@ function Register() {
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={user}
+                                    value={userType}
                                     onChange={handleUserChange}
                                 >
                                     <MenuItem value="Instructor">Instructor</MenuItem>
-                                    <MenuItem value="Student">Student</MenuItem>
-                                    <MenuItem value="User">User</MenuItem>
+                                    <MenuItem value="Artist">Artist</MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
-                        <Button variant="contained" spacing={1}>Back to Login</Button>
+                        <Button href="http://localhost:3000/#/login" variant="contained" spacing={1}>Back to Login</Button>
                         <Button type="submit" variant="contained">Register</Button>
                     </Grid>
                 </Container>
