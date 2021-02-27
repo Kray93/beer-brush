@@ -17,7 +17,7 @@ import Upcoming from '../../components/Upcoming';
 
 
 
-function Events() {
+function Classes() {
     const [selectedDate, setSelectedDate] = React.useState(new Date('2021-03-4'));
 
     const handleDateChange = (date) => {
@@ -51,4 +51,4 @@ function Events() {
         </>
     )
 }
-export default Events;
+export default Classes;
