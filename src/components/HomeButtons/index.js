@@ -49,7 +49,7 @@ export default function ContainedButtons() {
         <div className={classes.root}>
             <Grid container justify="center" >
                 <Grid className={classes.butGrid} container item justify="center" sm={3} >
-                    <Button className={classes.but} variant='contained' color='primary' >Events</Button>
+                    <Button href="http://localhost:3000/#/classes" className={classes.but} variant='contained' color='primary' >Classes</Button>
                 </Grid>
                 <Grid className={classes.butGrid} container item justify="center" sm={3} >
                     <Button className={classes.but} variant='contained' color='primary' >Store</Button>
