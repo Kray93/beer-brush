@@ -10,7 +10,12 @@ function Gallery() {
         <>
             <Navbar />
             <Container className="container">
-                <GalleryCard/>
+                <GalleryCard 
+                // test items********* image, title, description props
+                image="https://lh3.googleusercontent.com/proxy/oNUaNFLUevqJNKwISFstlgBuZx0nNn-qHjl9N2FFDNmER67BiwBw3AnzUoDEUVkIucDyviHcqUfgpIXLJBZwpQuCQ9LxTCuJHiliLw0LnNLW7PUCArKf7Skln_b19sd4aSXFVidLgsfScxZA"
+                title="skull"
+                description="Painting of skull"
+                />
             </Container>
         </>
     )
