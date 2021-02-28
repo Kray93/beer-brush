@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
+import { useHistory } from "react-router-dom";
+import Axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
@@ -13,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import './style.css'
+import Navbar from '../../components/Navbar';
 
 function Login() {
     const useStyles = makeStyles((theme) => ({
@@ -38,64 +41,78 @@ function Login() {
         },
     }));
     const classes = useStyles();
-    const [values, setValues] = React.useState({
+    const history = useHistory();
+    const [userName, setUserName] = useState('');
+    const [password, setValues] = useState({
         password: '',
-        weight: '',
-        weightRange: '',
         showPassword: false,
     });
     const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
+        setValues({ ...password, [prop]: event.target.value });
     };
 
     const handleClickShowPassword = () => {
-        setValues({ ...values, showPassword: !values.showPassword });
+        setValues({ ...password, showPassword: !password.showPassword });
     };
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+    const handleSubmit = e => {
+        e.preventDefault();
+        console.log(userName, password.password);
+        Axios.get(`http://localhost:3001/api/user/login`)
+            .then((res) => {
+                console.log(res);
+                history.push(`/home`)
+
+            }).catch(err => {
+                console.log(err);
+            });
+    };
     return (
         <>
+            <Navbar />
             <CssBaseline />
             <Container className="container" maxWidth="xs">
-                <h5>Login</h5>
-                <Grid container direction="column"
-                    justify="center"
-                    alignItems="center" spacing={1}>
-                    <Grid item xs={6}>
-                        <FormControl>
-                            <InputLabel htmlFor="my-input">Email address</InputLabel>
-                            <Input id="my-input" aria-describedby="my-helper-text" />
-                        </FormControl>
+                <h2>Login</h2>
+                <form onSubmit={handleSubmit}>
+                    <Grid container direction="column"
+                        justify="center"
+                        alignItems="center" spacing={1}>
+                        <Grid item xs={6}>
+                            <FormControl>
+                                <InputLabel htmlFor="my-input">Username</InputLabel>
+                                <Input onChange={e => setUserName(e.target.value)} id="my-input" aria-describedby="my-helper-text" />
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <FormControl className={clsx(classes.margin, classes.textField)}>
+                                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                                <Input
+                                    id="standard-adornment-password"
+                                    type={password.showPassword ? 'text' : 'password'}
+                                    value={password.password}
+                                    onChange={handleChange('password')}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                            >
+                                                {password.showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid>
+                            <Button type="submit" variant="contained">Login</Button>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={6}>
-                        <FormControl className={clsx(classes.margin, classes.textField)}>
-                            <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                            <Input
-                                id="standard-adornment-password"
-                                type={values.showPassword ? 'text' : 'password'}
-                                value={values.password}
-                                onChange={handleChange('password')}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                        >
-                                            {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                            />
-                        </FormControl>
-                    </Grid>
-                    <Grid>
-                    <Button variant="contained" spacing={1}>Home</Button>
-                    <Button variant="contained">Login</Button>
-                    </Grid>
-                </Grid>
+                </form>
             </Container>
         </>
     )

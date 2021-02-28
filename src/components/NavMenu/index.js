@@ -9,6 +9,7 @@ import MenuList from '@material-ui/core/MenuList';
 import MenuIcon from '@material-ui/icons/Menu';
 import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -75,7 +76,7 @@ export default function MenuListComposition() {
                                     <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                                         <MenuItem onClick={handleClose}>Gallery</MenuItem>
                                         <MenuItem onClick={handleClose}>About Us</MenuItem>
-                                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                                        <MenuItem onClick={handleClose} ><Link to="/classes">Classes</Link></MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
                             </Paper>
