@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Register from "./pages/Register"
 import Classes from "./pages/Classes"
 import Home from "./pages/Home"
+import Gallery from './pages/Gallery';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route exact path="/register" component={Register} />
       <Route ecact path="/classes" component={Classes} />
       <Route exact path="/home" component={Home} />
+      <Route exact path="/gallery" component={Gallery} />
     </div>
     </Router>
   );
