@@ -1,0 +1,26 @@
+/* .about {
+    margin-top:5vh;
+    width: 65%;
+    /* Extra small devices (phones, 600px and down) */
+/* @media only screen and (max-width: 600px) {
+    .about {background: red;}
+  }
+} */ 
+
+.about {
+    margin-top: 8vh;
+    margin-bottom:7vh;
+    width: 70%;
+  }
+  
+  @media screen and (min-width: 601px) {
+    .about {
+      font-size: 3vh;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .about {
+      font-size: 1.5vh;
+    }
+  }
