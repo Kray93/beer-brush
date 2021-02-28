@@ -1,0 +1,15 @@
+.cardText {
+    font-size: 0.6rem;
+   }
+   
+   /* @media screen and (min-width: 601px) {
+     .cardText {
+       font-size: 2vh;
+     } */
+   /* } */
+   
+   @media screen and (max-width: 600px) {
+     .cardText {
+       font-size: 1.5vh;
+     }
+   }
