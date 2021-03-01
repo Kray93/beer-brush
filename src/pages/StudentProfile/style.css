@@ -1,0 +1,13 @@
+.bio {
+    margin-top: 8vh;
+    margin-bottom:7vh;
+    width: 70%;
+    /* color: white; */
+    box-shadow: 1px 1px 1px 1px black;
+    border-radius:6px;
+  }
+
+  /* .identify {
+    display: block;
+  } */
+  
