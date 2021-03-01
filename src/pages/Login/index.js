@@ -70,6 +70,10 @@ function Login() {
                 console.log(err);
             });
     };
+    const handleHome = e => {
+        e.preventDefault();
+        history.push(`/about`)
+    };
     return (
         <>
             <Navbar />
@@ -110,6 +114,7 @@ function Login() {
                         </Grid>
                         <Grid>
                             <Button type="submit" variant="contained">Login</Button>
+                            <Button onClick={handleHome} variant="contained">Back</Button>
                         </Grid>
                     </Grid>
                 </form>

@@ -4,9 +4,9 @@ import './App.css';
 import Login from './pages/Login';
 import Gallery from './pages/Gallery';
 import Register from "./pages/Register";
-import About from './pages/Splash';
 import Classes from "./pages/Classes";
 import Home from "./pages/Home";
+import Splash from './pages/Splash';
 
 function App() {
   return (
@@ -17,7 +17,8 @@ function App() {
       <Route ecact path="/classes" component={Classes} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/gallery" component={Gallery} />
-      <Route exact path="/splash" component={About} />
+      <Route exact path="/about" component={Splash} />
+      <Route exact path="/" component={Splash} />
     </div>
     </Router>
   );

@@ -1,13 +1,13 @@
+
+// IF USER IS NOT LOGGED IN. USE THIS SPLASHPAGE NAVBAR
+// ====================================================
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import MenuListComposition from "./NavMenu";
-import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,20 +25,25 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar() {
     const classes = useStyles();
     const history = useHistory();
-    const handleLogout = (e) => {
+    const handleLogin = (e) => {
         e.preventDefault();
-        history.push("/");
+        history.push("/login");
+    }
+    const handleRegister = (e) => {
+        e.preventDefault();
+        history.push("/register")
     }
     
     return (
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <MenuListComposition/>
                     <Typography variant="h6" align="center" className={classes.title}>
-                        Spuds
+                        Airbrush Artistry
                     </Typography>
-                    <Button onClick={handleLogout} color="inherit">Logout</Button>
+                    <Button onClick={handleLogin} color="inherit">Login</Button>
+                    <p>|</p>
+                    <Button onClick={handleRegister} color="inherit">Register</Button>
                 </Toolbar>
             </AppBar>
         </div>
