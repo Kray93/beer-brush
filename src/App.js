@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import About from './pages/Splash';
 import Classes from "./pages/Classes";
 import Home from "./pages/Home";
+import Instructor from './pages/instructorProfile'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route exact path="/home" component={Home} />
       <Route exact path="/gallery" component={Gallery} />
       <Route exact path="/splash" component={About} />
+      <Route exact path="/instructor" component={Instructor} />
     </div>
     </Router>
   );
