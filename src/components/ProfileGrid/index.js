@@ -4,7 +4,6 @@ import Card from '@material-ui/core/Card';
 
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
 
@@ -81,11 +80,9 @@ export default function SplashCard() {
             title= "potato"
       />
           <CardContent>
-            {/* <Typography className={classes.cardText} color="textSecondary" component="p"> */}
               <p className= "cardText" >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ligula nibh, blandit ut gravida vitae, tempor ac est. Aliquam ut pulvinar magna. Curabitur ipsum dui, accumsan ut risus sodales, tempus luctus ipsum. Aenean tempor tincidunt porta. Sed ipsum turpis, sagittis a scelerisque nec, rutrum nec quam.
               </p>
-        {/* </Typography> */}
           </CardContent>
         </Card>
       </Grid>
