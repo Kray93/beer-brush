@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import './style.css'
-import Navbar from '../../components/Navbar';
+import PreLogNav from '../../components/PreLogNav';
 
 function Login() {
     const useStyles = makeStyles((theme) => ({
@@ -76,7 +76,7 @@ function Login() {
     };
     return (
         <>
-            <Navbar />
+            <PreLogNav />
             <CssBaseline />
             <Container className="container" maxWidth="xs">
                 <h2>Login</h2>
