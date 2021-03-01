@@ -5,6 +5,13 @@
 
 .newClassForm > * {
     margin: 1em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.duration {
+    display: flex;
+    justify-content: space-between;
 }
 
 table {
