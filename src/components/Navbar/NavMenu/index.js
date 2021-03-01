@@ -11,9 +11,11 @@ import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom'
 
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+        zIndex: 9
     },
     paper: {
         marginRight: theme.spacing(2),
@@ -78,6 +80,7 @@ export default function MenuListComposition() {
                                         <MenuItem onClick={handleClose}><Link to="/about">About Us</Link></MenuItem>
                                         <MenuItem onClick={handleClose} ><Link to="/classes">Classes</Link></MenuItem>
                                         <MenuItem onClick={handleClose} ><Link to="/home">Home</Link></MenuItem>
+                                        <MenuItem onClick={handleClose} ><Link to="/instructor">Instructor</Link></MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
                             </Paper>
