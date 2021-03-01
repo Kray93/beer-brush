@@ -3,12 +3,11 @@ import Navbar from '../../components/Navbar'
 import {Link} from "react-router-dom"
 
 import './style.css'
-
-
+import axios from 'axios'
 
 export default function Index() {
 
-    const [mainContent, setMainContent] = useState('upcomingClasses')
+    const [contentBtn, setContentBtn] = useState('upcomingClasses')
     const [allClasses, setAllClass] = useState({
         data: [{
             name: "Tyler's class",
@@ -49,13 +48,24 @@ export default function Index() {
     ]
     })
 
+    const newClassSubmit = e => {
+        e.preventDefault('http://localhost:3001/api/classes/new')
+        let name = e.target.name.value
+        let level = e.target.level.value
+        let date = e.target.date.value
+        let time = e.target.time.value
+        let duration = e.target.duration.value
+        let recurring = e.target.recurring.value
+
+        axios.post(``)
+    }
+
     const handleChange = e => {
-        console.log(e);
-        setMainContent(e.target.value)
+        setContentBtn(e.target.value)
     }
 
     const content = e => {
-        if(mainContent === 'upcomingClasses'){
+        if(contentBtn === 'upcomingClasses'){
             return <div>
             <div className="title">
                 <h1>Upcoming Class</h1>
@@ -81,17 +91,38 @@ export default function Index() {
                     </tbody>
                 </table>
         </div>
-        } else if(mainContent === 'newClass'){
+        } else if(contentBtn === 'newClass'){
             return <div>
                 <div className="title">
                     <h1>Add New Class</h1>
                 </div>
-                <form className="newClassForm">
-                    <input type="text" name="name" placeholder="event name"/>
-                    <input type="text" name="level" placeholder="Level"/>
-                    <input type="text" name="date" placeholder="date"/>
-                    <input type="text" name="time" placeholder="time"/>
-                    <input type="text" name="duration" placeholder="duration"/>
+                <form className="newClassForm" onSubmit={newClassSubmit}>
+                    <div>
+                        <label htmlFor="name">Name of Class: </label>
+                        <input type="text" name="name" placeholder="Class Name"/>
+                    </div>
+                    <hr/>
+                    <div>
+                        <label htmlFor="level">Difficulty Level: </label>
+                        <input type="Number" name="level" placeholder="Level"/>
+                    </div>
+                    <hr/>
+                    <div>
+                        <label htmlFor="date">Date: </label>
+                        <input type="date" name="date" placeholder="date"/>
+                    </div>
+                    <hr/>
+                    <div>
+                        <label htmlFor="time">Time: </label>
+                        <input type="time" name="time" placeholder="time"/>
+                    </div>
+                    <hr/>
+                    <p>Duration</p>
+                    <div className="duration">
+                        <input type="number" name="duration" placeholder="Hours"/>
+                        <input type="number" name="duration" placeholder="Minutes"/>
+                    </div>
+                    <hr/>
                     <div className="recurringRadioBtn">
                         <p>Is this class recurring?</p>
                         <label htmlFor="no">No</label>
@@ -99,8 +130,9 @@ export default function Index() {
                         <label htmlFor="yes">Yes</label>
                         <input type="radio" id="yes" name="recurring" value="yes" placeholder="recurring"/>
                     </div>
+
                     <input type="text" name="location" placeholder="location"/>
-                    <button>Create!</button>
+                    <button className="btn">Create!</button>
                 </form>
             </div>
         }
