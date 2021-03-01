@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import './style.css'
-import Navbar from '../../components/Navbar';
+import PreLogNav from '../../components/PreLogNav';
 
 function Login() {
     const useStyles = makeStyles((theme) => ({
@@ -61,18 +61,24 @@ function Login() {
     const handleSubmit = e => {
         e.preventDefault();
         console.log(userName, password.password);
-        Axios.get(`http://localhost:3001/api/user/login`)
+        let userData = {
+            uname: userName, 
+            pw: password.password}
+        Axios.get(`http://localhost:3001/api/user/login`, userData)
             .then((res) => {
                 console.log(res);
                 history.push(`/home`)
-
             }).catch(err => {
                 console.log(err);
             });
     };
+    const handleHome = e => {
+        e.preventDefault();
+        history.push(`/about`)
+    };
     return (
         <>
-            <Navbar />
+            <PreLogNav />
             <CssBaseline />
             <Container className="container" maxWidth="xs">
                 <h2>Login</h2>
@@ -110,6 +116,7 @@ function Login() {
                         </Grid>
                         <Grid>
                             <Button type="submit" variant="contained">Login</Button>
+                            <Button onClick={handleHome} variant="contained">Back</Button>
                         </Grid>
                     </Grid>
                 </form>
