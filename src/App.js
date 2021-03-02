@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { HashRouter as Router, Route } from "react-router-dom"
 import './App.css';
-import Login from './pages/Login';
+// import Login from './pages/Login';
 import Gallery from './pages/Gallery';
 import Register from "./pages/Register";
 import Classes from "./pages/Classes";

@@ -119,7 +119,7 @@ export default function MenuListComposition() {
                     aria-haspopup="true"
                     onClick={handleToggle}
                 >
-                    <MenuIcon style={{ color: grey[50] }} />
+                    <MenuIcon style={{ color: grey[900] }} />
                 </Button>
                 <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
