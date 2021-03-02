@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 import './style.css'
 import PreLogNav from '../../components/PreLogNav';
 
-function Login() {
+function Login(props) {
     const useStyles = makeStyles((theme) => ({
         root: {
             display: 'flex',
@@ -64,10 +64,16 @@ function Login() {
         let userData = {
             uname: userName, 
             pw: password.password}
-        Axios.get(`http://localhost:3001/api/user/login`, userData)
+        Axios.post(`http://localhost:3001/api/user/login`, userData)
             .then((res) => {
                 console.log(res);
-                history.push(`/home`)
+                if (res.status===200) {
+                    localStorage.setItem("activeUser", JSON.stringify(res.data));
+                    history.push("/home")
+                //     console.log(props);
+                //    return props.onReturn(res.data);
+                }
+                
             }).catch(err => {
                 console.log(err);
             });
@@ -76,6 +82,10 @@ function Login() {
         e.preventDefault();
         history.push(`/about`)
     };
+
+
+
+
     return (
         <>
             <PreLogNav />
