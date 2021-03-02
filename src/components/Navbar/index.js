@@ -38,7 +38,7 @@ export default function Navbar() {
                 <Toolbar>
                     <MenuListComposition/>
                     <Typography variant="h6" align="center" className={classes.title}>
-                        Spuds
+                        Artisan's Lounge
                     </Typography>
                     <Button onClick={handleLogout} color="inherit">Logout</Button>
                 </Toolbar>
