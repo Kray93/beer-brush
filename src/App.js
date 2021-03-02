@@ -18,8 +18,7 @@ function App() {
       <Route exact path="/register" component={Register} />
       <Route ecact path="/classes" component={Classes} />
       <Route exact path="/home" component={Home} />
-      <Route exact path="/splash" component={About} />
-      <Route exact path="/student-profile" component={StudentProfile}/>
+      <Route exact path="/student" component={StudentProfile}/>
       <Route exact path="/gallery" component={Gallery} />
       <Route exact path="/about" component={Splash} />
       <Route exact path="/" component={Splash} />

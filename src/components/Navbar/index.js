@@ -30,7 +30,7 @@ export default function Navbar() {
         e.preventDefault();
         history.push("/");
     }
-    
+    // TODO: check creds/token to display NAVMENU on about page
     return (
         <div className={classes.root}>
             <AppBar position="static">

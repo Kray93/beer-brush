@@ -15,10 +15,11 @@ import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        zIndex: 9
+        "z-index": 9
     },
     paper: {
         marginRight: theme.spacing(2),
+        // zIndex:10
     },
 })); 
 
@@ -30,9 +31,9 @@ export default function MenuListComposition() {
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
     };
-    const handleClose = (event) => {
+    const handleClose = (event, err) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
-            return;
+            if (err) throw err
         }
 
         setOpen(false);
@@ -55,28 +56,34 @@ export default function MenuListComposition() {
     const clickGallery = (e) => {
         e.preventDefault();
         history.push("/gallery");
-        handleClose();
+        handleClose(e);
     }
     const clickAbout = (e) => {
         e.preventDefault();
         history.push("/about");
-        handleClose();
+        handleClose(e);
     }
     const clickClasses = (e) => {
         e.preventDefault();
         history.push("/classes");
-        handleClose();
+        handleClose(e);
     }
     const clickHome = (e) => {
         e.preventDefault();
         history.push("/home");
-        handleClose();
+        handleClose(e);
     }
     const clickInstructor = (e) => {
         e.preventDefault();
         history.push("/instructor");
-        handleClose();
+        handleClose(e);
     }
+    const clickStudent = (e) => {
+        e.preventDefault();
+        history.push("/student");
+        handleClose(e);
+    }
+    // TODO: const function to check creds/token for student/instructor and display items only for that user type. 
     return (
         <div className={classes.root}>
             <div>
@@ -101,6 +108,7 @@ export default function MenuListComposition() {
                                         <MenuItem onClick={clickAbout}>About Us</MenuItem>
                                         <MenuItem onClick={clickClasses} >Classes</MenuItem>
                                         <MenuItem onClick={clickHome} >Home</MenuItem>
+                                        <MenuItem onClick={clickStudent} >Student</MenuItem>
                                         <MenuItem onClick={clickInstructor} >Instructor</MenuItem>
                                     </MenuList>
                                 </ClickAwayListener>
