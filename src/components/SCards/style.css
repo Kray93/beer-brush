@@ -1,0 +1,16 @@
+.cardText {
+   font-size: 1vw;
+   padding:2px
+  }
+  
+  /* @media screen and (min-width: 601px) {
+    .cardText {
+      font-size: 2vh;
+    } */
+  /* } */
+  
+  @media screen and (max-width: 600px) {
+    .cardText {
+      font-size: 1vw;
+    }
+  }
