@@ -60,23 +60,7 @@ export default function SplashCard() {
   return (
     
       <Grid container justify="center" className={classes.root} >
-      <Grid className={classes.cardGrid} container item justify="center" sm={3} xs={12}>
-        <Card className={classes.cards} >
-          
-          <CardMedia
-            className={classes.media}
-            image= "https://cdn.abcotvs.com/dip/images/6129476_042420-wabc-coronavirus-farm-to-food-banks-img.jpg?w=800&r=16%3A9"
-            title= "potato"
-      />
-          <CardContent className={classes.contentBox}>
-            {/* <Typography className={classes.cardText} color="textSecondary" component="p"> */}
-           <p className= "cardText">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ligula nibh, blandit ut gravida vitae, tempor ac est. Aliquam ut pulvinar magna. Curabitur ipsum dui, accumsan ut risus sodales, tempus luctus ipsum. Aenean tempor tincidunt porta. Sed ipsum turpis, sagittis a scelerisque nec, rutrum nec quam.
-              </p>
-        {/* </Typography> */}
-          </CardContent>
-        </Card>
-      </Grid>
+      
       <Grid className={classes.cardGrid} container item justify="center" sm={3} xs={12}>
         <Card className={classes.cards}>
           
