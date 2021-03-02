@@ -6,6 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import MenuListComposition from "./NavMenu";
 import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
+import { colors, Container } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
+import logo from "../../images/artisanLogo.svg";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -17,8 +21,10 @@ const useStyles = makeStyles((theme) => ({
     menuButton: {
         marginRight: theme.spacing(2),
     },
-    title: {
+    logo: {
+        height: 100,
         flexGrow: 1,
+        
 
     },
 }));
@@ -34,13 +40,14 @@ export default function Navbar() {
     // TODO: check creds/token to display NAVMENU on about page
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar style={{ background: grey[50] }} position="static">
                 <Toolbar>
                     <MenuListComposition/>
-                    <Typography variant="h6" align="center" className={classes.title}>
-                        Artisan's Lounge
-                    </Typography>
-                    <Button onClick={handleLogout} color="inherit">Logout</Button>
+                    <img className= {classes.logo} src={logo} align= "center"/>
+                    
+                    
+                     
+                    <Button style={{ color: grey[900] }}onClick={handleLogout} color="inherit" >Logout</Button>
                 </Toolbar>
             </AppBar>
         </div>
