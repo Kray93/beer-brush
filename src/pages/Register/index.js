@@ -48,7 +48,7 @@ function Register() {
     const [last, setLast] = useState();
     const [email, setEmail] = useState();
     const [userName, setUserName] = useState();
-    const [userType, setUserType] = useState('');
+    const [userType, setUserType] = useState();
     const [password, setPassword] = useState({
         password: '',
         showPassword: false,
@@ -61,7 +61,8 @@ function Register() {
             lname:last,
             email:email,
             pw:password.password,
-            uname:userName
+            uname:userName,
+            isArtist:userType
         }
         Axios.post(`http://localhost:3001/api/user/register`,userData)
         .then((res) => {
@@ -76,7 +77,11 @@ function Register() {
         setPassword({ ...password, [prop]: event.target.value });
     };
     const handleUserChange = (event) => {
-        setUserType(event.target.value);
+        if (event.target.value==="Artist") {
+            setUserType(true);
+        } else {
+            setUserType(false);
+        }
     };
 
     const handleClickShowPassword = () => {

@@ -84,9 +84,9 @@ export default function MenuListComposition() {
         handleClose(e);
     }
     const conditionalMenu = () => {
-        let activeUser = localStorage.getItem("activeUser");
-        let userType = activeUser.data.userType
-        if (userType === 1) {
+        let activeUser = JSON.parse(localStorage.getItem("activeUser"));
+        let isArtist = activeUser.data.user.isArtist;
+        if (isArtist===false) {
             return <div>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                     <MenuItem onClick={clickGallery}>Gallery</MenuItem>
