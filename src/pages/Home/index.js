@@ -5,14 +5,15 @@ import "./style.css";
 import Grid from "@material-ui/core/Grid";
 import {checkUser} from '../../helper/index'
 import { useHistory } from "react-router-dom";
+import red from '@material-ui/core/colors/red';
 
 function Home() {
-    const history = useHistory();
-    useEffect(()=>{
-        if (!checkUser()) {
-            history.push("/login")
-        }
-    },[])
+    // const history = useHistory();
+    // useEffect(()=>{
+    //     if (!checkUser()) {
+    //         history.push("/login")
+    //     }
+    // },[])
 
     return(
         <>

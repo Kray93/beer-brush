@@ -44,7 +44,7 @@ export default function Navbar() {
                     </Typography>
                     <Button onClick={handleLogin} color="inherit">Login</Button>
                     <p>|</p>
-                    <Button onClick={handleRegister} color="inherit">Register</Button>
+                    <Button onClick={handleRegister}  color="inherit">Register</Button>
                 </Toolbar>
             </AppBar>
         </div>

@@ -86,7 +86,7 @@ export default function MenuListComposition() {
     const conditionalMenu = () => {
         let activeUser = localStorage.getItem("activeUser");
         let userType = activeUser.data.userType
-        if (x === 1) {
+        if (userType === 1) {
             return <div>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                     <MenuItem onClick={clickGallery}>Gallery</MenuItem>
@@ -119,7 +119,7 @@ export default function MenuListComposition() {
                     aria-haspopup="true"
                     onClick={handleToggle}
                 >
-                    <MenuIcon style={{ color: grey[50] }} />
+                    <MenuIcon style={{ color: grey[900] }} />
                 </Button>
                 <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
