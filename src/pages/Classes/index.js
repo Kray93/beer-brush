@@ -43,7 +43,7 @@ function Classes() {
                             }}
                         />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid container justify= "center" item >
                         <Upcoming/>       
                     </Grid>
                 </MuiPickersUtilsProvider>
