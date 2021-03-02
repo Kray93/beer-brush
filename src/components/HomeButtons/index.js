@@ -42,17 +42,17 @@ export default function ContainedButtons() {
     const history = useHistory();
     const classes = useStyles();
     // const clickMypage = (e) => {
-        // // if JWT token and login creds pass for student go to student page
-        // if (condition) {
-        //     e.preventDefault();
-        //     history.push("/student");
-        // // if JWT token and login creds pass for student go to instructor page
-        // } else if (condition) {
-        //     e.preventDefault();
-        //     history.push("/instructor");
-        // } else {
-        //     return;
-        // }
+    //     // if JWT token and login creds pass for student go to student page
+    //     if (condition) {
+    //         e.preventDefault();
+    //         history.push("/student");
+    //     // if JWT token and login creds pass for student go to instructor page
+    //     } else if (condition) {
+    //         e.preventDefault();
+    //         history.push("/instructor");
+    //     } else {
+    //         return;
+    //     }
     // }
     const clickClasses = (e) => {
         e.preventDefault();

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
         // zIndex:10
     },
-})); 
+}));
 
 export default function MenuListComposition() {
     const classes = useStyles();
@@ -83,6 +83,32 @@ export default function MenuListComposition() {
         history.push("/student");
         handleClose(e);
     }
+    const conditionalMenu = () => {
+        let activeUser = localStorage.getItem("activeUser");
+        let userType = activeUser.data.userType
+        if (x === 1) {
+            return <div>
+                <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
+                    <MenuItem onClick={clickAbout}>About Us</MenuItem>
+                    <MenuItem onClick={clickClasses} >Classes</MenuItem>
+                    <MenuItem onClick={clickHome} >Home</MenuItem>
+                    <MenuItem onClick={clickInstructor} >Instructor</MenuItem>
+                </MenuList>
+            </div>
+        } else {
+            return <div>
+                <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
+                    <MenuItem onClick={clickAbout}>About Us</MenuItem>
+                    <MenuItem onClick={clickClasses} >Classes</MenuItem>
+                    <MenuItem onClick={clickHome} >Home</MenuItem>
+                    <MenuItem onClick={clickStudent} >Student</MenuItem>
+                    
+                </MenuList>
+            </div>
+        }
+    }
     // TODO: const function to check creds/token for student/instructor and display items only for that user type. 
     return (
         <div className={classes.root}>
@@ -93,8 +119,8 @@ export default function MenuListComposition() {
                     aria-haspopup="true"
                     onClick={handleToggle}
                 >
-                    <MenuIcon style={{ color: grey[50] }}/>
-        </Button>
+                    <MenuIcon style={{ color: grey[50] }} />
+                </Button>
                 <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
                         <Grow
@@ -103,14 +129,7 @@ export default function MenuListComposition() {
                         >
                             <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
-                                    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                        <MenuItem onClick={clickGallery}>Gallery</MenuItem>
-                                        <MenuItem onClick={clickAbout}>About Us</MenuItem>
-                                        <MenuItem onClick={clickClasses} >Classes</MenuItem>
-                                        <MenuItem onClick={clickHome} >Home</MenuItem>
-                                        <MenuItem onClick={clickStudent} >Student</MenuItem>
-                                        <MenuItem onClick={clickInstructor} >Instructor</MenuItem>
-                                    </MenuList>
+                                {conditionalMenu()}
                                 </ClickAwayListener>
                             </Paper>
                         </Grow>

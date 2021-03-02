@@ -27,6 +27,7 @@ export default function Navbar() {
     const classes = useStyles();
     const history = useHistory();
     const handleLogout = (e) => {
+        localStorage.removeItem("activeUser");
         e.preventDefault();
         history.push("/");
     }
