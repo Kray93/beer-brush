@@ -2,9 +2,17 @@
     margin-top: 1em;
     margin-bottom:3em;
     width: 20%;
+    /* color: white; */
   }
-
-  /* .identify {
-    display: block;
-  } */
-  
+.schedule {
+  /* color: white; */
+}
+.table {
+  min-width: 400;
+  width: 70vw;
+}
+.addBtn {
+  margin: 10px;
+  height: 30px;
+  align-self: flex-end;
+}
