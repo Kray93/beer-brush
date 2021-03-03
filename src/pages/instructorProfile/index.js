@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from '../../components/Navbar'
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import './style.css'
 import axios from 'axios'
@@ -18,12 +18,12 @@ export default function Index() {
 
         // get all of current user's classes
         axios.get(`http://localhost:3001/api/classes/${activeUserId}`)
-        .then(resp => {
-            console.log(resp);
-            setAllClass({data: resp.data.data})
-        }).catch(err => console.log(err))
+            .then(resp => {
+                // console.log(resp);
+                setAllClass({ data: resp.data.data })
+            }).catch(err => console.log(err))
 
-    },[])
+    }, [contentBtn])
 
     const newClassSubmit = e => {
         e.preventDefault()
@@ -48,10 +48,11 @@ export default function Index() {
         }
 
         axios.post(`http://localhost:3001/api/classes/new`, data)
-        .then(resp => {
-            console.log(resp);
-        })
-        .catch(err => console.log(err))
+            .then(resp => {
+                console.log(resp);
+                setContentBtn("upcomingClasses")
+            })
+            .catch(err => console.log(err))
     }
 
     const handleChange = e => {
@@ -59,33 +60,35 @@ export default function Index() {
     }
 
     const content = e => {
-        if(contentBtn === 'upcomingClasses'){
+        if (contentBtn === 'upcomingClasses') {
             return <div>
-            <div className="title">
-                <h1>Upcoming Class</h1>
-            </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* {allClasses.data.map(item => {
-                            return <tr>
-                                <td>{item.name}</td>
-                                <td>{item.date}</td>
-                                <td>{item.time}</td>
-                                <td><Link>Edit</Link> | <Link>Delete</Link></td>
+                <div className="title">
+                    <h1>Upcoming Class</h1>
+                </div>
+                {allClasses === undefined ? <p>Loading...</p> :
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Actions</th>
                             </tr>
-                        })} */}
-                    </tbody>
-                </table>
-        </div>
-        } else if(contentBtn === 'newClass'){
+                        </thead>
+                        <tbody>
+                            {allClasses.data.map(item => {
+                                return <tr>
+                                    <td>{item.name}</td>
+                                    <td>{item.date}</td>
+                                    <td>{item.time}</td>
+                                    <td><Link>Edit</Link> | <Link>Delete</Link></td>
+                                </tr>
+                            })}
+                        </tbody>
+                    </table>
+                }
+            </div>
+        } else if (contentBtn === 'newClass') {
             return <div>
                 <div className="title">
                     <h1>Add New Class</h1>
@@ -93,39 +96,39 @@ export default function Index() {
                 <form className="newClassForm" onSubmit={newClassSubmit}>
                     <div>
                         <label htmlFor="name">Name of Class: </label>
-                        <input type="text" name="name" placeholder="Class Name"/>
+                        <input type="text" name="name" placeholder="Class Name" />
                     </div>
-                    <hr/>
+                    <hr />
                     <div>
                         <label htmlFor="level">Difficulty Level: </label>
-                        <input type="Number" name="level" placeholder="Level"/>
+                        <input type="Number" name="level" placeholder="Level" />
                     </div>
-                    <hr/>
+                    <hr />
                     <div>
                         <label htmlFor="date">Date: </label>
-                        <input type="date" name="date" placeholder="date"/>
+                        <input type="date" name="date" placeholder="date" />
                     </div>
-                    <hr/>
+                    <hr />
                     <div>
                         <label htmlFor="time">Time: </label>
-                        <input type="time" name="time" placeholder="time"/>
+                        <input type="time" name="time" placeholder="time" />
                     </div>
-                    <hr/>
+                    <hr />
                     <p>Duration</p>
                     <div className="duration">
-                        <input type="number" name="durationHr" placeholder="Hours"/>
-                        <input type="number" name="durationMin" placeholder="Minutes"/>
+                        <input type="number" name="durationHr" placeholder="Hours" />
+                        <input type="number" name="durationMin" placeholder="Minutes" />
                     </div>
-                    <hr/>
+                    <hr />
                     <div className="recurringRadioBtn">
                         <p>Is this class recurring?</p>
                         <label htmlFor="no">No</label>
-                        <input type="radio" id="no" name="recurring" value={false} placeholder="recurring"/>
+                        <input type="radio" id="no" name="recurring" value={false} placeholder="recurring" />
                         <label htmlFor="yes">Yes</label>
-                        <input type="radio" id="yes" name="recurring" value={true} placeholder="recurring"/>
+                        <input type="radio" id="yes" name="recurring" value={true} placeholder="recurring" />
                     </div>
 
-                    <input type="text" name="location" placeholder="location"/>
+                    <input type="text" name="location" placeholder="location" />
                     <button className="btn">Create!</button>
                 </form>
             </div>
@@ -134,11 +137,11 @@ export default function Index() {
 
     return (
         <div>
-            <Navbar/>
+            <Navbar />
             <h1>Instructor</h1>
             <div className="btns">
-                <button className="btn" value="newClass" onClick={(e) => handleChange(e)}>New Class</button>
                 <button className="btn" value="upcomingClasses" onClick={(e) => handleChange(e)}>Upcoming Class</button>
+                <button className="btn" value="newClass" onClick={(e) => handleChange(e)}>New Class</button>
             </div>
             <div className="content">
                 {content()}
