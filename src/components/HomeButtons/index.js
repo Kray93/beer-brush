@@ -2,14 +2,14 @@ import { React } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-
+import { useHistory } from 'react-router-dom';
+import grey from '@material-ui/core/colors/red';
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
         "& > *": {
-            paddingTop: 10,
-            
+            paddingTop: 10,  
         },
     },
     butGrid: {
@@ -20,8 +20,6 @@ const useStyles = makeStyles((theme) => ({
             [theme.breakpoints.down('sm')]: {
                 margin:12,
             },
-
-
         },
     },
     but: {
@@ -37,28 +35,84 @@ const useStyles = makeStyles((theme) => ({
             [theme.breakpoints.down('xs')]: {
                 padding:40,
             },
-
         },
     },
 }));
 
 export default function ContainedButtons() {
+    const history = useHistory();
     const classes = useStyles();
-
+    // const clickMypage = (e) => {
+    //     // if JWT token and login creds pass for student go to student page
+    //     if (condition) {
+    //         e.preventDefault();
+    //         history.push("/student");
+    //     // if JWT token and login creds pass for student go to instructor page
+    //     } else if (condition) {
+    //         e.preventDefault();
+    //         history.push("/instructor");
+    //     } else {
+    //         return;
+    //     }
+    // }
+    const clickClasses = (e) => {
+        e.preventDefault();
+        history.push("/classes");
+    }
+    const clickAbout = (e) => {
+        e.preventDefault();
+        history.push("/about");
+    }
+    const clickGallery = (e) => {
+        e.preventDefault();
+        history.push("/gallery");
+    }
     return (
         <div className={classes.root}>
             <Grid container justify="center" >
                 <Grid className={classes.butGrid} container item justify="center" sm={3} >
-                    <Button href="http://localhost:3000/#/classes" className={classes.but} variant='contained' color='primary' >Classes</Button>
+                    <Button 
+                    onClick={clickClasses} 
+                    className={classes.but} 
+                    variant='contained' 
+                    style={{ color: grey[50] }}
+                    style={{ backgroundColor:"#7b0d00" }}  
+                    >
+                        Classes
+                    </Button>
                 </Grid>
                 <Grid className={classes.butGrid} container item justify="center" sm={3} >
-                    <Button className={classes.but} variant='contained' color='primary' >Store</Button>
+                    <Button 
+                    // onClick={clickMypage} 
+                    className={classes.but} 
+                    variant='contained' 
+                    style={{ color: grey[50] }}
+                    style={{ backgroundColor:"#7b0d00" }} 
+                    >
+                        My Page
+                    </Button>
                 </Grid>
                 <Grid className={classes.butGrid} container item justify="center" sm={3}>
-                    <Button className={classes.but} variant='contained' color='primary' >Lessons</Button>
+                    <Button 
+                    onClick={clickAbout}
+                    className={classes.but} 
+                    variant='contained' 
+                    style={{ color: grey[50] }}
+                    style={{ backgroundColor:"#7b0d00" }}
+                    >
+                        About Us
+                    </Button>
                 </Grid>
                 <Grid className={classes.butGrid} container item justify="center" sm={3}>
-                    <Button className={classes.but} variant='contained' color='primary' >Gallery</Button>
+                    <Button 
+                    onClick={clickGallery}
+                    className={classes.but} 
+                    variant='contained' 
+                    style={{ color:"#fffff" }}
+                    style={{ backgroundColor:"#7b0d00" }} 
+                    >
+                        Gallery
+                    </Button>
                 </Grid>
             </Grid>
         </div>

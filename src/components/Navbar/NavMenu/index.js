@@ -15,12 +15,13 @@ import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        zIndex: 9
+        "z-index": 9
     },
     paper: {
         marginRight: theme.spacing(2),
+        // zIndex:10
     },
-})); 
+}));
 
 export default function MenuListComposition() {
     const classes = useStyles();
@@ -30,9 +31,9 @@ export default function MenuListComposition() {
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
     };
-    const handleClose = (event) => {
+    const handleClose = (event, err) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
-            return;
+            if (err) throw err
         }
 
         setOpen(false);
@@ -55,28 +56,60 @@ export default function MenuListComposition() {
     const clickGallery = (e) => {
         e.preventDefault();
         history.push("/gallery");
-        handleClose();
+        handleClose(e);
     }
     const clickAbout = (e) => {
         e.preventDefault();
         history.push("/about");
-        handleClose();
+        handleClose(e);
     }
     const clickClasses = (e) => {
         e.preventDefault();
         history.push("/classes");
-        handleClose();
+        handleClose(e);
     }
     const clickHome = (e) => {
         e.preventDefault();
         history.push("/home");
-        handleClose();
+        handleClose(e);
     }
     const clickInstructor = (e) => {
         e.preventDefault();
         history.push("/instructor");
-        handleClose();
+        handleClose(e);
     }
+    const clickStudent = (e) => {
+        e.preventDefault();
+        history.push("/student");
+        handleClose(e);
+    }
+    const conditionalMenu = () => {
+        let activeUser = JSON.parse(localStorage.getItem("activeUser"));
+        let isArtist = activeUser.data.user.isArtist;
+        if (isArtist===false) {
+            return <div>
+                <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
+                    <MenuItem onClick={clickAbout}>About Us</MenuItem>
+                    <MenuItem onClick={clickClasses} >Classes</MenuItem>
+                    <MenuItem onClick={clickHome} >Home</MenuItem>
+                    <MenuItem onClick={clickInstructor} >Instructor</MenuItem>
+                </MenuList>
+            </div>
+        } else {
+            return <div>
+                <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
+                    <MenuItem onClick={clickAbout}>About Us</MenuItem>
+                    <MenuItem onClick={clickClasses} >Classes</MenuItem>
+                    <MenuItem onClick={clickHome} >Home</MenuItem>
+                    <MenuItem onClick={clickStudent} >Student</MenuItem>
+                    
+                </MenuList>
+            </div>
+        }
+    }
+    // TODO: const function to check creds/token for student/instructor and display items only for that user type. 
     return (
         <div className={classes.root}>
             <div>
@@ -86,8 +119,8 @@ export default function MenuListComposition() {
                     aria-haspopup="true"
                     onClick={handleToggle}
                 >
-                    <MenuIcon style={{ color: grey[50] }}/>
-        </Button>
+                    <MenuIcon style={{ color: grey[900] }} />
+                </Button>
                 <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
                         <Grow
@@ -96,13 +129,7 @@ export default function MenuListComposition() {
                         >
                             <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
-                                    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                        <MenuItem onClick={clickGallery}>Gallery</MenuItem>
-                                        <MenuItem onClick={clickAbout}>About Us</MenuItem>
-                                        <MenuItem onClick={clickClasses} >Classes</MenuItem>
-                                        <MenuItem onClick={clickHome} >Home</MenuItem>
-                                        <MenuItem onClick={clickInstructor} >Instructor</MenuItem>
-                                    </MenuList>
+                                {conditionalMenu()}
                                 </ClickAwayListener>
                             </Paper>
                         </Grow>
