@@ -11,20 +11,47 @@ export default function Index() {
     const [allClasses, setAllClass] = useState()
 
     useEffect(() => {
+        // get active user id
+        const activeUser = JSON.parse(localStorage.getItem("activeUser"))
+        const activeUserId = activeUser.data.user.id
+        console.log(activeUserId);
+
         // get all of current user's classes
-        
+        axios.get(`http://localhost:3001/api/classes/${activeUserId}`)
+        .then(resp => {
+            console.log(resp);
+            setAllClass({data: resp.data.data})
+        }).catch(err => console.log(err))
+
     },[])
 
     const newClassSubmit = e => {
-        e.preventDefault('http://localhost:3001/api/classes/new')
-        let name = e.target.name.value
-        let level = e.target.level.value
-        let date = e.target.date.value
-        let time = e.target.time.value
-        let duration = e.target.duration.value
-        let recurring = e.target.recurring.value
+        e.preventDefault()
 
-        axios.post(``)
+        const activeUser = JSON.parse(localStorage.getItem("activeUser"))
+        const activeUserId = activeUser.data.user.id
+
+        const durationHr = e.target.durationHr.value
+        const durationMin = e.target.durationMin.value
+
+        let totalDuration = (durationHr * 1000 * 60 * 60) + (durationMin * 1000 * 60)
+
+        let data = {
+            name: e.target.name.value,
+            level: e.target.level.value,
+            date: e.target.date.value,
+            time: e.target.time.value,
+            duration: totalDuration,
+            recurring: e.target.recurring.value,
+            location: e.target.location.value,
+            userId: activeUserId
+        }
+
+        axios.post(`http://localhost:3001/api/classes/new`, data)
+        .then(resp => {
+            console.log(resp);
+        })
+        .catch(err => console.log(err))
     }
 
     const handleChange = e => {
@@ -47,14 +74,14 @@ export default function Index() {
                         </tr>
                     </thead>
                     <tbody>
-                        {allClasses.data.map(item => {
+                        {/* {allClasses.data.map(item => {
                             return <tr>
                                 <td>{item.name}</td>
                                 <td>{item.date}</td>
                                 <td>{item.time}</td>
                                 <td><Link>Edit</Link> | <Link>Delete</Link></td>
                             </tr>
-                        })}
+                        })} */}
                     </tbody>
                 </table>
         </div>
@@ -86,16 +113,16 @@ export default function Index() {
                     <hr/>
                     <p>Duration</p>
                     <div className="duration">
-                        <input type="number" name="duration" placeholder="Hours"/>
-                        <input type="number" name="duration" placeholder="Minutes"/>
+                        <input type="number" name="durationHr" placeholder="Hours"/>
+                        <input type="number" name="durationMin" placeholder="Minutes"/>
                     </div>
                     <hr/>
                     <div className="recurringRadioBtn">
                         <p>Is this class recurring?</p>
                         <label htmlFor="no">No</label>
-                        <input type="radio" id="no" name="recurring" value="no" placeholder="recurring"/>
+                        <input type="radio" id="no" name="recurring" value={false} placeholder="recurring"/>
                         <label htmlFor="yes">Yes</label>
-                        <input type="radio" id="yes" name="recurring" value="yes" placeholder="recurring"/>
+                        <input type="radio" id="yes" name="recurring" value={true} placeholder="recurring"/>
                     </div>
 
                     <input type="text" name="location" placeholder="location"/>
