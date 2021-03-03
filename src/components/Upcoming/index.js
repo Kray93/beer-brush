@@ -8,13 +8,14 @@ import './style.css'
 import axios from 'axios';
 
 function Upcoming(props) {
-  const {name, date, level, location, recurring, time, UserId, duration} = props.data
+  const {fname, lname, date, level, location, recurring, time, UserId, duration} = props.data
   const [userName, setUserName] = useState()
 
   useEffect(() => {
     // get the user who posted this.
     axios.get(`http://localhost:3001/api/user/${UserId}`)
     .then(resp => {
+      console.log(resp);
       setUserName(resp.data.data.uname)
     })
   },[])
@@ -22,7 +23,7 @@ function Upcoming(props) {
   const reserveSpot = (e) => {
     console.log(e.target);
     // get currentLogged in user
-    
+
   }
 
   return (
@@ -33,7 +34,7 @@ function Upcoming(props) {
       <Card>
         <CardContent className="content">
           <div className="title">
-            <h3>{name}</h3>
+            <h3>{fname} {lname}</h3>
             <p>date: {date}</p>
           </div>
           <p>Class taught by: {userName}</p>
