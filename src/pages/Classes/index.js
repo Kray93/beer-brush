@@ -25,6 +25,8 @@ function Classes() {
                 data: resp.data
             }
             setAllClasses(outcome)
+        }).catch(err => {
+            console.log(err);
         })
     },[])
 
