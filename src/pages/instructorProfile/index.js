@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Navbar from '../../components/Navbar'
 import {Link} from "react-router-dom"
 
@@ -8,45 +8,12 @@ import axios from 'axios'
 export default function Index() {
 
     const [contentBtn, setContentBtn] = useState('upcomingClasses')
-    const [allClasses, setAllClass] = useState({
-        data: [{
-            name: "Tyler's class",
-            level: 1,
-            date: "12/1/2021",
-            time: "17:00",
-            duration: "2hr",
-            price: "free",
-            location: "Yo momma's house",
-        },
-        {
-            name: "Erik's class",
-            level: 99,
-            date: "12/1/2021",
-            time: "18:00",
-            duration: "1hr",
-            price: "$1,000,000",
-            location: "Yo dad's house",
-        },
-        {
-            name: "Kevin's class",
-            level: 5,
-            date: "12/1/2021",
-            time: "06:00",
-            duration: "30 Min",
-            price: "$1",
-            location: "My house",
-        },
-        {
-            name: "Claire's class",
-            level: 15,
-            date: "12/1/2021",
-            time: "03:00",
-            duration: "1.5hr",
-            price: "$10",
-            location: "The School House",
-        },
-    ]
-    })
+    const [allClasses, setAllClass] = useState()
+
+    useEffect(() => {
+        // get all of current user's classes
+        
+    },[])
 
     const newClassSubmit = e => {
         e.preventDefault('http://localhost:3001/api/classes/new')
