@@ -118,14 +118,14 @@ export default function MenuListComposition() {
                     aria-controls={open ? 'menu-list-grow' : undefined}
                     aria-haspopup="true"
                     onClick={handleToggle}
-                >
+                    >
                     <MenuIcon style={{ color: grey[900] }} />
                 </Button>
                 <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
                         <Grow
-                            {...TransitionProps}
-                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                        {...TransitionProps}
+                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
                         >
                             <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
