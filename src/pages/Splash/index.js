@@ -1,5 +1,4 @@
 import React from 'react'
-import SplashCard from "../../components/SCards";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
 import Navbar from '../../components/Navbar';
@@ -18,12 +17,6 @@ function Splash() {
                 <Grid>
                     <p>Register and Login to learn more!</p>
                 </Grid>
-                {/* <Grid container justify= "center">
-                    <h2>Meet the TEAM!</h2>
-                </Grid>
-                <Grid container justify= "center"> 
-                <SplashCard/>
-                </Grid> */}
         </div>
     )
 };
