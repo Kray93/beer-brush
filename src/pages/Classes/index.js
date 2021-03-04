@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./style.css"
 import 'date-fns';
 import Navbar from '../../components/Navbar'
@@ -19,40 +19,30 @@ function Classes() {
 
     useEffect(() => {
         axios.get("http://localhost:3001/api/classes/all")
-        .then(resp => {
-            console.log(resp);
-            const outcome = {
-                data: resp.data
-            }
-            setAllClasses(outcome)
-        }).catch(err => {
-            console.log(err);
-        })
-    },[])
+            .then(resp => {
+                setAllClasses([resp.data])
+            }).catch(err => {
+                console.log(err);
+            })
+    }, [])
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
 
     const content = () => {
-        if(allClasses === undefined){
+        if (allClasses === undefined) {
             return <div><p>Loading...</p></div>
         } else {
             const user = JSON.parse(localStorage.getItem("activeUser")).data.user
-            console.log(user);
-            let data ={
-                fname: user.fname,
-                lname: user.lname,
-                date: user.date,
-                level: user.level,
-                location: user.location,
-                recurring: user.recurring,
-                time: user.time,
-                UserId: user.UserId,
-                duration: user.duration,
-            }
+
             return <div>
-                <Upcoming data={data}/>
+                {allClasses[0].data.map(aClass => {
+                    console.log("something");
+                    return <div>
+                        <p>test</p>
+                    </div>
+                })}
             </div>
         }
     }
@@ -77,8 +67,8 @@ function Classes() {
                             }}
                         />
                     </Grid>
-                    <Grid container justify= "center" item >
-                        
+                    <Grid container justify="center" item >
+
                         {content()}
                         {/* <Upcoming /> */}
 
@@ -90,3 +80,25 @@ function Classes() {
     )
 }
 export default Classes;
+
+
+/*
+                {allClasses[0].data.forEach(aClass => {
+
+                    let data = {
+                        name: aClass.name,
+                        date: aClass.date,
+                        level: aClass.level,
+                        location: aClass.location,
+                        recurring: aClass.recurring,
+                        time: aClass.time,
+                        UserId: aClass.UserId,
+                        duration: aClass.duration,
+                    }
+
+                    return <div>
+                        <Upcoming data={data} />
+                    </div>
+                })
+                }
+                */

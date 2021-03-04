@@ -8,15 +8,15 @@ import './style.css'
 import axios from 'axios';
 
 function Upcoming(props) {
-  const { fname, lname, date, level, location, recurring, time, UserId, duration } = props.data
+  const { name, date, level, location, recurring, time, UserId, duration } = props.data
   const [userName, setUserName] = useState()
 
   useEffect(() => {
+    // console.log('testing use effect');
     // get the user who posted this.
     axios.get(`http://localhost:3001/api/user/${UserId}`)
       .then(resp => {
-        console.log(resp);
-        if (!resp) {
+        if (resp) {
           setUserName(resp.data.user.uname)
         }
       })
@@ -33,11 +33,12 @@ function Upcoming(props) {
       <Grid container justify="center">
         <h3>Upcoming Events</h3>
       </Grid>
+      {/* {console.log(userName)} */}
       {userName !== undefined ?
         <Card>
           <CardContent className="content">
             <div className="title">
-              <h3>{fname} {lname}</h3>
+              <h3>{name} {name}</h3>
               <p>date: {date}</p>
             </div>
             <p>Class taught by: {userName}</p>
