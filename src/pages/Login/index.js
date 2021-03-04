@@ -15,7 +15,6 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import './style.css'
-import Navbar from '../../components/Navbar';
 
 function Login(props) {
     const useStyles = makeStyles((theme) => ({
@@ -69,7 +68,8 @@ function Login(props) {
                 console.log(res);
                 if (res.status===200) {
                     localStorage.setItem("activeUser", JSON.stringify(res.data));
-                    history.push("/home")
+                    props.onReturn()
+                    // history.push("/home")
                 //     console.log(props);
                 //    return props.onReturn(res.data);
                 }
@@ -82,9 +82,6 @@ function Login(props) {
         e.preventDefault();
         history.push(`/about`)
     };
-
-
-
 
     return (
         <>
