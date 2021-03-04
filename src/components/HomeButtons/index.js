@@ -6,11 +6,10 @@ import { useHistory } from 'react-router-dom';
 import { grey } from '@material-ui/core/colors';
 
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
         "& > *": {
-            paddingTop: 10,  
+            paddingTop: 10,
         },
     },
     butGrid: {

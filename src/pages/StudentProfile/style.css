@@ -4,15 +4,35 @@
     width: 20%;
     /* color: white; */
   }
+  
 .schedule {
   /* color: white; */
 }
+
 .table {
   min-width: 400;
   width: 70vw;
 }
+
 .addBtn {
   margin: 10px;
   height: 30px;
   align-self: flex-end;
+}
+
+.addProjectFormBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addProjectForm {
+  margin-top: 1em;
+  display: flex;
+  flex-flow: column nowrap;
+  width: 25%;
+}
+
+.addProjectForm > * {
+  margin: 0.5em 0;
 }

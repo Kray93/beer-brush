@@ -9,7 +9,6 @@ import Home from "./pages/Home";
 import StudentProfile from "./pages/StudentProfile";
 import Splash from './pages/Splash';
 import Instructor from './pages/instructorProfile'
-import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import Navbar from './components/Navbar';
 import BottomAppBar from "./components/Footer";
@@ -17,53 +16,84 @@ import BottomAppBar from "./components/Footer";
 
 function App() {
   const [activeUser, setActiveUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [userInfo, setUserInfo] = useState();
 
-  const [userInfo, setUserInfo] = useState();
-  
   const confirmation = () => {
     let token = JSON.parse(localStorage.getItem("activeUser"));
     if (token) token = token.data.token;
-    console.log(token);
+    // console.log(token);
     axios.get("http://localhost:3001/api/user/secretclub", {
       headers: {
         "authorization": `Bearer ${token}`
       }
-    }).then((res)=> {
-      console.log(res);
+    }).then((res) => {
+      // console.log(res);
       setActiveUser(res.data);
-    }).catch((err)=>{
+    }).catch((err) => {
       console.log(err);
     })
   }
+
   useEffect(confirmation, []);
 
+  useEffect(() => {
+    showNav();
+  }, [isLoggedIn]);
 
-  const history = useHistory();
-  const loginSuccess = (e)=>{
-    console.log("success yo");
-    console.log(e);
-    history.push(`/home`);
+  const loginSuccess = () => {
+    console.log("success yo!");
+    setIsLoggedIn(true);
+  }
+
+  const showNav = () => {
+    return <Navbar activeUser={activeUser} />
   }
 
   return (
     <Router>
-    <div className="App">
-      <Navbar activeUser={activeUser} />
-      <div>
-      <Route exact path="/" component={Splash} />
-      <Route exact path="/about" component={Splash} />
-      <Route exact path="/login" component={Login} onReturn={(e)=>loginSuccess(e)} />
-      <Route exact path="/register" component={Register} />
-      <Route exact path="/home" component={Home} />
-      <Route exact path="/gallery" component={Gallery} />
-      <Route ecact path="/classes" component={Classes} />
-      <Route exact path="/student" component={StudentProfile}/>
-      <Route exact path="/instructor">
-        <Instructor activeUser={activeUser} />
-      </Route>
-      </div>
-      <BottomAppBar/>
-    </div>
+
+      {activeUser !== undefined ?
+        <div className="App">
+          {showNav()}
+          <div>
+          <Route exact path="/" component={Splash} >
+            <Splash activeUser={activeUser} />
+          </Route>
+          <Route exact path="/about" component={Splash}>
+            <Splash activeUser={activeUser} />
+          </Route>
+          <Route exact path="/login" >
+            <Login onReturn={(e) => loginSuccess(e)} activeUser={activeUser} />
+          </Route>
+          <Route exact path="/register">
+            <Register activeUser={activeUser} />
+          </Route>
+          <Route exact path="/home">
+            <Home activeUser={activeUser} />
+          </Route>
+          <Route exact path="/gallery">
+            <Gallery activeUser={activeUser} />
+          </Route>
+          <Route exact path="/classes">
+            <Classes activeUser={activeUser} />
+          </Route>
+          <Route exact path="/student">
+            <StudentProfile activeUser={activeUser} />
+          </Route>
+          <Route exact path="/project">
+            <StudentProfile activeUser={activeUser} />
+          </Route>
+          <Route exact path="/instructor">
+            <Instructor activeUser={activeUser} />
+          </Route>
+          </div>
+          <BottomAppBar/>
+        </div>
+        :
+        <p>Loading...</p>
+      }
+
     </Router>
   );
 }

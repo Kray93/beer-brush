@@ -9,7 +9,6 @@ import { grey } from '@material-ui/core/colors';
 import logo from "../../images/artisanLogo.svg";
 import "./style.css"
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -47,7 +46,7 @@ export default function Navbar(props) {
     // TODO: check creds/token to display NAVMENU on about page
     const loginCreds = () => {
         let activeUser = props.activeUser;
-        console.log(activeUser);
+        // console.log(activeUser);
         if (activeUser) {
             return (
                 <div className={classes.root}>

@@ -11,7 +11,6 @@ import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -52,10 +51,10 @@ export default function MenuListComposition(props) {
         }
         prevOpen.current = open;
     }, [open]);
-    const history = useHistory();
-    const clickGallery = (e) => {
+
+    const clickHome = (e) => {
         e.preventDefault();
-        history.push("/gallery");
+        history.push("/home");
         handleClose(e);
     }
     const clickAbout = (e) => {
@@ -68,9 +67,10 @@ export default function MenuListComposition(props) {
         history.push("/classes");
         handleClose(e);
     }
-    const clickHome = (e) => {
+    const history = useHistory();
+    const clickGallery = (e) => {
         e.preventDefault();
-        history.push("/home");
+        history.push("/gallery");
         handleClose(e);
     }
     const clickInstructor = (e) => {
@@ -86,25 +86,25 @@ export default function MenuListComposition(props) {
     const conditionalMenu = () => {
         let activeUser = props.activeUser
         let isArtist = activeUser.isArtist;
-        if (isArtist===false) {
+        if (isArtist === false) {
             return <div>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
+                    <MenuItem onClick={clickHome} >Home</MenuItem>
                     <MenuItem onClick={clickAbout}>About Us</MenuItem>
                     <MenuItem onClick={clickClasses} >Classes</MenuItem>
-                    <MenuItem onClick={clickHome} >Home</MenuItem>
-                    <MenuItem onClick={clickInstructor} >Instructor</MenuItem>
+                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
+                    <MenuItem onClick={clickInstructor} >My Page</MenuItem>
                 </MenuList>
             </div>
         } else {
             return <div>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
+                    <MenuItem onClick={clickHome} >Home</MenuItem>
                     <MenuItem onClick={clickAbout}>About Us</MenuItem>
                     <MenuItem onClick={clickClasses} >Classes</MenuItem>
-                    <MenuItem onClick={clickHome} >Home</MenuItem>
-                    <MenuItem onClick={clickStudent} >Student</MenuItem>
-                    
+                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
+                    <MenuItem onClick={clickStudent} >My Page</MenuItem>
+
                 </MenuList>
             </div>
         }
@@ -118,18 +118,18 @@ export default function MenuListComposition(props) {
                     aria-controls={open ? 'menu-list-grow' : undefined}
                     aria-haspopup="true"
                     onClick={handleToggle}
-                    >
+                >
                     <MenuIcon style={{ color: grey[900] }} />
                 </Button>
                 <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
                         <Grow
-                        {...TransitionProps}
-                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                            {...TransitionProps}
+                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
                         >
                             <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
-                                {conditionalMenu()}
+                                    {conditionalMenu()}
                                 </ClickAwayListener>
                             </Paper>
                         </Grow>
