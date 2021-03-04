@@ -1,7 +1,6 @@
 import React, {useState, useEffect } from 'react'
 import "./style.css"
 import 'date-fns';
-import Navbar from '../../components/Navbar'
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
@@ -80,8 +79,6 @@ function Classes() {
                         
                         {content()}
                         {/* <Upcoming /> */}
-
-
                     </Grid>
                 </MuiPickersUtilsProvider>
             </Container>

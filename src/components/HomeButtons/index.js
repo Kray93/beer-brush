@@ -5,7 +5,6 @@ import Grid from "@material-ui/core/Grid";
 import { useHistory } from 'react-router-dom';
 import grey from '@material-ui/core/colors/red';
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
         "& > *": {
@@ -75,8 +74,7 @@ export default function ContainedButtons() {
                     onClick={clickClasses} 
                     className={classes.but} 
                     variant='contained' 
-                    style={{ color: grey[50] }}
-                    style={{ backgroundColor:"#7b0d00" }}  
+                    style={{ color: grey[50], backgroundColor:"#7b0d00" }} 
                     >
                         Classes
                     </Button>
@@ -86,8 +84,7 @@ export default function ContainedButtons() {
                     // onClick={clickMypage} 
                     className={classes.but} 
                     variant='contained' 
-                    style={{ color: grey[50] }}
-                    style={{ backgroundColor:"#7b0d00" }} 
+                    style={{ color: grey[50], backgroundColor:"#7b0d00" }}
                     >
                         My Page
                     </Button>
@@ -97,8 +94,7 @@ export default function ContainedButtons() {
                     onClick={clickAbout}
                     className={classes.but} 
                     variant='contained' 
-                    style={{ color: grey[50] }}
-                    style={{ backgroundColor:"#7b0d00" }}
+                    style={{ color: grey[50], backgroundColor:"#7b0d00" }}
                     >
                         About Us
                     </Button>
@@ -108,8 +104,7 @@ export default function ContainedButtons() {
                     onClick={clickGallery}
                     className={classes.but} 
                     variant='contained' 
-                    style={{ color:"#fffff" }}
-                    style={{ backgroundColor:"#7b0d00" }} 
+                    style={{ color:"#fffff", backgroundColor:"#7b0d00" }}
                     >
                         Gallery
                     </Button>
