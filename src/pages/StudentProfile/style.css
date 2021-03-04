@@ -1,13 +1,18 @@
-.bio {
-    margin-top: 8vh;
-    margin-bottom:7vh;
-    width: 70%;
+.name {
+    margin-top: 1em;
+    margin-bottom:3em;
+    width: 20%;
     /* color: white; */
-    box-shadow: 1px 1px 1px 1px black;
-    border-radius:6px;
   }
-
-  /* .identify {
-    display: block;
-  } */
-  
+.schedule {
+  /* color: white; */
+}
+.table {
+  min-width: 400;
+  width: 70vw;
+}
+.addBtn {
+  margin: 10px;
+  height: 30px;
+  align-self: flex-end;
+}

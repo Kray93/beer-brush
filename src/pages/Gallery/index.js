@@ -8,7 +8,6 @@ import GalleryCard from '../../components/GalleryCard';
 function Gallery() {
     return (
         <>
-            <Navbar />
             <Container className="container">
                 <GalleryCard 
                 // test items********* image, title, description props

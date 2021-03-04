@@ -18,7 +18,7 @@ function Home() {
 
     return(
         <>
-        <Navbar/>
+        
             <Grid container justify = "center" >
                 <img className= "mainImg" src= "https://i.ytimg.com/vi/SrQf0214Hdg/maxresdefault.jpg" alt="pic"/>
             </Grid>

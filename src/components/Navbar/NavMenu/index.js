@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function MenuListComposition() {
+export default function MenuListComposition(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
@@ -84,8 +84,8 @@ export default function MenuListComposition() {
         handleClose(e);
     }
     const conditionalMenu = () => {
-        let activeUser = JSON.parse(localStorage.getItem("activeUser"));
-        let isArtist = activeUser.data.user.isArtist;
+        let activeUser = props.activeUser
+        let isArtist = activeUser.isArtist;
         if (isArtist===false) {
             return <div>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
@@ -118,14 +118,14 @@ export default function MenuListComposition() {
                     aria-controls={open ? 'menu-list-grow' : undefined}
                     aria-haspopup="true"
                     onClick={handleToggle}
-                >
+                    >
                     <MenuIcon style={{ color: grey[900] }} />
                 </Button>
                 <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
                         <Grow
-                            {...TransitionProps}
-                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                        {...TransitionProps}
+                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
                         >
                             <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
