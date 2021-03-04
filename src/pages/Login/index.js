@@ -70,8 +70,6 @@ function Login(props) {
                     localStorage.setItem("activeUser", JSON.stringify(res.data));
                     props.onReturn()
                     history.push("/home")
-                //     console.log(props);
-                //    return props.onReturn(res.data);
                 }
                 
             }).catch(err => {

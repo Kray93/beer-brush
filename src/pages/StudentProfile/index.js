@@ -21,7 +21,7 @@ function createData(name, Date, Time, Instructor) {
 
 const selectedClasses = [];
 
-function StudentProfile() {
+function StudentProfile(props) {
   const [userData, setUserData] = useState()
   const [view, setView] = useState("overview")
   // const [images, setImages] = useState([]);
