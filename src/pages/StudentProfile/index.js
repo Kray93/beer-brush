@@ -68,6 +68,32 @@ function StudentProfile(props) {
     setView(newView)
   }
 
+  const addProjectSubmit = (e) => {
+    e.preventDefault()
+    let data = {
+      title: e.target.title.value,
+      artistId: 'Tyler',
+      dateStarted: e.target.dateStarted.value,
+      dateFinished: e.target.dateFinished.value,
+      description: e.target.desc.value,
+      materialUsed: e.target.materialUsed.value,
+      category: e.target.categories.value,
+      forSale: e.target.forSale.value,
+      isPublic: e.target.isPublic.value,
+    }
+
+    console.log(data);
+
+    let token = JSON.parse(localStorage.getItem("activeUser"));
+    token = token.data.token;
+    axios.post('http://localhost:3001/api/project/newProject', data, {
+      headers: {
+        "authorization": `Bearer ${token}`
+    }
+    }).then(resp => {
+      console.log(resp);
+    }).catch(err => console.log(err))
+  }
   const content = () => {
     if (view === 'overview') {
       return <div>
@@ -101,30 +127,43 @@ function StudentProfile(props) {
       </div>
     } else if (view === "addProject") {
       return <div>
-        <form className="addProjectForm">
-          <input type="text" name="title" placeholder="title" />
-          <input type="text" name="dateStarted" placeholder="date started" />
-          <input type="text" name="dateFinished" placeholder="date finished" />
-          <input type="text" name="description" placeholder="description" />
-          <input type="text" name="materialUsed" placeholder="material used" />
-          <input type="text" name="category" placeholder="category" />
-          <div>
-            <label htmlFor="forSale">For Sale:</label>
-            <input type="checkbox" name="forSale" />
-          </div>
-          <div>
-            <label htmlFor="isPublic">Make it public:</label>
-            <input type="checkbox" name="forSale" />
-          </div>
-          {/* <CloudinaryContext cloudName="brush">
+        <div className="addProjectFormBox">
+
+          <form className="addProjectForm" onSubmit={addProjectSubmit}>
+            <input type="text" name="title" placeholder="title" />
+            <input type="date" name="dateStarted" placeholder="date started" />
+            <input type="date" name="dateFinished" placeholder="date finished" />
+            <textarea name="desc" cols="30" rows="10"></textarea>
+            <select name="materialUsed">
+              <option value="wood">Wood</option>
+              <option value="metal">Metal</option>
+              <option value="canvas">Canvas</option>
+              <option value="ceramics">ceramics</option>
+            </select>
+            <select name="categories">
+              <option value="woodWorking">Wood Working</option>
+              <option value="metalWorking">Metal Working</option>
+              <option value="sewing">Sewing</option>
+              <option value="Painting">Painting</option>
+            </select>
+            <div>
+              <label htmlFor="forSale">For Sale:</label>
+              <input type="checkbox" name="forSale" />
+            </div>
+            <div>
+              <label htmlFor="isPublic">Make it public:</label>
+              <input type="checkbox" name="isPublic" />
+            </div>
+            {/* <CloudinaryContext cloudName="brush">
             <button onClick={() => beginUpload()}>Upload Image</button>
             <section>
               {images.map(i => <img src={i} alt="" />)}
             </section>
           </CloudinaryContext> */}
-          <input type="file" name="photo" />
-          <button>Add Project!</button>
-        </form>
+            {/* <input type="file" name="photo" /> */}
+            <button className="btn">Add Project!</button>
+          </form>
+        </div>
       </div>
     }
   }

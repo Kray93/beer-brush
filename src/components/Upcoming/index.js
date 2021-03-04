@@ -8,7 +8,7 @@ import './style.css'
 import axios from 'axios';
 
 function Upcoming(props) {
-  const { name, date, level, location, recurring, time, userId, duration } = props.data
+  const {classId, name, date, level, location, recurring, time, userId, duration } = props.data
   const [creatorData, setCreatorData] = useState()
 
   useEffect(() => {
@@ -23,8 +23,10 @@ function Upcoming(props) {
   }, [])
 
   const reserveSpot = (e) => {
-    console.log(e.target);
+    console.log(e.target.value);
     // get currentLogged in user
+    axios.post('')
+
   }
 
   return (
@@ -43,14 +45,7 @@ function Upcoming(props) {
             <p>recurring: {recurring}</p>
           </CardContent>
           <CardActions>
-            <Button
-              variant='contained'
-              color='primary'
-              size="small"
-              onClick={reserveSpot}
-            >
-              Reserve your spot!
-            </Button>
+            <button className="btn" value={classId} onClick={reserveSpot}>Reserve Your Spot!</button>
           </CardActions>
         </Card>
         :
