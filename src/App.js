@@ -12,6 +12,8 @@ import Instructor from './pages/instructorProfile'
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import Navbar from './components/Navbar';
+import BottomAppBar from "./components/Footer";
+
 
 function App() {
   const [activeUser, setActiveUser] = useState(null);
@@ -47,6 +49,7 @@ function App() {
     <Router>
     <div className="App">
       <Navbar activeUser={activeUser} />
+      <div>
       <Route exact path="/" component={Splash} />
       <Route exact path="/about" component={Splash} />
       <Route exact path="/login" component={Login} onReturn={(e)=>loginSuccess(e)} />
@@ -58,6 +61,8 @@ function App() {
       <Route exact path="/instructor">
         <Instructor activeUser={activeUser} />
       </Route>
+      </div>
+      <BottomAppBar/>
     </div>
     </Router>
   );

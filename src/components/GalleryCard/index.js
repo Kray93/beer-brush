@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { grey } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
   root: {
@@ -39,10 +40,10 @@ function GalleryCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" style={{ color: grey[800] }}>
           Like
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" style={{ color: grey[800] }}>
           Remove
         </Button>
       </CardActions>

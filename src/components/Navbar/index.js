@@ -5,10 +5,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import MenuListComposition from "./NavMenu";
 import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import { colors, Container } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import logo from "../../images/artisanLogo.svg";
-import zIndex from '@material-ui/core/styles/zIndex';
 import "./style.css"
 
 
@@ -56,8 +54,8 @@ export default function Navbar(props) {
                     <AppBar style={{ background: grey[50] }} position="static">
                         <Toolbar>
                             <MenuListComposition activeUser={activeUser} />
-                            <img className={classes.logo} src={logo} align="center" />
-                            <Button style={{ color: grey[900] }} onClick={handleLogout} color="inherit" >Logout</Button>
+                            <img className={classes.logo} src={logo} align="center" alt="logo" />
+                            <Button style={{ color: grey[50] }} onClick={handleLogout} color="inherit" >Logout</Button>
                         </Toolbar>
                     </AppBar>
                 </div>
@@ -67,10 +65,16 @@ export default function Navbar(props) {
                 <div className={classes.root}>
                     <AppBar style={{ background: grey[50] }} position="static">
                         <Toolbar>
-                        <img className={classes.logo} src={logo} align="center" />
-                            <Button className="color" onClick={handleLogin} color="inherit">Login</Button>
-                            <p className="color">|</p>
-                            <Button className="color" onClick={handleRegister} color="inherit">Register</Button>
+                            <MenuListComposition/>
+                        <img className={classes.logo} src={logo} align="center" alt="logo" />
+                           <div className= "wtf">
+                           <Button style={{ color: grey[900] }} className="color" onClick={handleLogin} color="inherit">
+                                <div className="color">Login</div>
+                                </Button>
+                            <div className="color">|</div>
+                            <Button style={{ color: grey[900] }}  onClick={handleRegister} color="inherit">
+                                <div className="color">Register</div></Button>
+                           </div>
                         </Toolbar>
                     </AppBar>
                 </div>

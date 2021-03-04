@@ -2,31 +2,14 @@ body {
   Position:relative ; 
   display:flex;
   flex-direction: column;
-  min-height: 100vh;
-  padding-bottom: 1rem;
+  min-height: 85vh;
+  padding-bottom: 5rem;
   margin:0;
-  font-family: 'Montserrat', sans-serif;
-  color: white;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  color: black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: black; */
-  /* color: white; */
 }
 /* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 } */
-.footer{
-  background: rgb(0,0,0);
-  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(99,99,99,1) 50%, rgba(0,0,0,1) 100%);
-  /* top: auto; */
-  bottom: 0%;  
-  width: 100%; 
-  padding: 0%;
-  position: absolute;
-  height: 4rem;
-  overflow-x: hidden;
-}

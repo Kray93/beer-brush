@@ -1,17 +1,15 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Toolbar from '@material-ui/core/Toolbar';
+import graphic from "../../images/footerGraphic.svg";
+import "./style.css"
 
 
 
 export default function BottomAppBar() {
-    const classes = useStyles();
-
     return (
-          <footer className="footer">
-            <Toolbar>  
-            </Toolbar>
-          </footer>
-      );
+        <footer className="footer">
+           
+            <img className="graphic" src={graphic} alt= "graphic" align="center" />
+           
+        </footer>
+    );
 }
