@@ -48,13 +48,15 @@ export default function Index(props) {
             location: e.target.location.value,
             userId: activeUserId
         }
+
+        console.log(data);
         let token = JSON.parse(localStorage.getItem("activeUser"));
         token = token.data.token;
-        axios.post(`http://localhost:3001/api/classes/new`, {
-            header: {
+        axios.post(`http://localhost:3001/api/classes/new`, data, {
+            headers: {
                 "authorization": `Bearer ${token}`
             }
-        }, data)
+        })
             .then(resp => {
                 console.log(resp);
                 setContentBtn("upcomingClasses")
