@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+// import { CloudinaryContext } from "cloudinary-react";
+// import { fetchPhotos, openUploadWidget } from "./CloudinaryService";
 import Navbar from "../../components/Navbar";
 import ProfileGrid from "../../components/ProfileGrid";
 import Grid from "@material-ui/core/Grid";
@@ -22,6 +24,30 @@ const selectedClasses = [];
 function StudentProfile(props) {
   const [userData, setUserData] = useState()
   const [view, setView] = useState("overview")
+  // const [images, setImages] = useState([]);
+
+  // const beginUpload = tag => {
+  //   const uploadOptions = {
+  //     cloudName: "brush",
+  //     tags: [tag],
+  //     uploadPreset: "upload"
+  //   };
+
+  //   openUploadWidget(uploadOptions, (error, photos) => {
+  //     if (!error) {
+  //       console.log(photos);
+  //       if (photos.event === 'success') {
+  //         setImages([...images, photos.info.public_id])
+  //       }
+  //     } else {
+  //       console.log(error);
+  //     }
+  //   })
+  // }
+
+  // useEffect(() => {
+  //   fetchPhotos("image", setImages);
+  // }, [])
 
   useEffect(() => {
     let token = JSON.parse(localStorage.getItem("activeUser"));
@@ -76,12 +102,12 @@ function StudentProfile(props) {
     } else if (view === "addProject") {
       return <div>
         <form className="addProjectForm">
-          <input type="text" name="title" placeholder="title"/>
-          <input type="text" name="dateStarted" placeholder="date started"/>
-          <input type="text" name="dateFinished" placeholder="date finished"/>
-          <input type="text" name="description" placeholder="description"/>
-          <input type="text" name="materialUsed" placeholder="material used"/>
-          <input type="text" name="category" placeholder="category"/>
+          <input type="text" name="title" placeholder="title" />
+          <input type="text" name="dateStarted" placeholder="date started" />
+          <input type="text" name="dateFinished" placeholder="date finished" />
+          <input type="text" name="description" placeholder="description" />
+          <input type="text" name="materialUsed" placeholder="material used" />
+          <input type="text" name="category" placeholder="category" />
           <div>
             <label htmlFor="forSale">For Sale:</label>
             <input type="checkbox" name="forSale" />
@@ -90,6 +116,12 @@ function StudentProfile(props) {
             <label htmlFor="isPublic">Make it public:</label>
             <input type="checkbox" name="forSale" />
           </div>
+          {/* <CloudinaryContext cloudName="brush">
+            <button onClick={() => beginUpload()}>Upload Image</button>
+            <section>
+              {images.map(i => <img src={i} alt="" />)}
+            </section>
+          </CloudinaryContext> */}
           <input type="file" name="photo" />
           <button>Add Project!</button>
         </form>
