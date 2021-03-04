@@ -1,4 +1,3 @@
-import React from "react";
 import React, { useEffect, useState } from "react";
 // import { CloudinaryContext } from "cloudinary-react";
 // import { fetchPhotos, openUploadWidget } from "./CloudinaryService";
