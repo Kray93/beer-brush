@@ -6,9 +6,10 @@ import axios from 'axios'
 
 export default function Index(props) {
 
-    const [contentBtn, setContentBtn] = useState('upcomingClasses')
-    const [allClasses, setAllClass] = useState()
+    const [contentBtn, setContentBtn] = useState()
+    const [allClasses, setAllClasses] = useState()
 
+ 
     useEffect(() => {
         // get active user id
         const activeUser = props.activeUser;
@@ -21,11 +22,15 @@ export default function Index(props) {
         // get all of current user's classes
         axios.get(`http://localhost:3001/api/classes/${activeUserId}`)
             .then(resp => {
-                // console.log(resp);
-                setAllClass({ data: resp.data.data })
+                console.log(resp);
+                setAllClasses({ data: resp.data.data })
             }).catch(err => console.log(err))
-
     }, [contentBtn])
+
+    useEffect(() => {
+        setContentBtn("upcomingClasses")
+    },[])
+
 
     const newClassSubmit = e => {
         e.preventDefault()
@@ -70,7 +75,7 @@ export default function Index(props) {
 
     const content = e => {
         if (contentBtn === 'upcomingClasses') {
-            return <div>
+            return <div className="InstructorUpcomingClassesBox">
                 <div className="title">
                     <h1>Upcoming Class</h1>
                 </div>
@@ -102,6 +107,9 @@ export default function Index(props) {
                 <div className="title">
                     <h1>Add New Class</h1>
                 </div>
+                <div className="NewClassformBox">
+
+                
                 <form className="newClassForm" onSubmit={newClassSubmit}>
                     <div>
                         <label htmlFor="name">Name of Class: </label>
@@ -140,6 +148,7 @@ export default function Index(props) {
                     <input type="text" name="location" placeholder="location" />
                     <button className="btn">Create!</button>
                 </form>
+                </div>
             </div>
         }
     }
