@@ -1,4 +1,3 @@
-import React from "react";
 import React, { useEffect, useState } from "react";
 // import { CloudinaryContext } from "cloudinary-react";
 // import { fetchPhotos, openUploadWidget } from "./CloudinaryService";
@@ -22,7 +21,7 @@ function createData(name, Date, Time, Instructor) {
 
 const selectedClasses = [];
 
-function StudentProfile() {
+function StudentProfile(props) {
   const [userData, setUserData] = useState()
   const [view, setView] = useState("overview")
   // const [images, setImages] = useState([]);

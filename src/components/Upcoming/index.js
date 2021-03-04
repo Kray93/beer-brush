@@ -8,16 +8,16 @@ import './style.css'
 import axios from 'axios';
 
 function Upcoming(props) {
-  const { fname, lname, date, level, location, recurring, time, UserId, duration } = props.data
-  const [userName, setUserName] = useState()
+  const { name, date, level, location, recurring, time, userId, duration } = props.data
+  const [creatorData, setCreatorData] = useState()
 
   useEffect(() => {
     // get the user who posted this.
-    axios.get(`http://localhost:3001/api/user/${UserId}`)
+    axios.get(`http://localhost:3001/api/user/get/${userId}`)
       .then(resp => {
         console.log(resp);
-        if (!resp) {
-          setUserName(resp.data.user.uname)
+        if (resp) {
+          setCreatorData(resp.data.data)
         }
       })
   }, [])
@@ -29,17 +29,14 @@ function Upcoming(props) {
 
   return (
     <div>
-      <Grid container justify="center">
-        <h3>Upcoming Events</h3>
-      </Grid>
-      {userName !== undefined ?
-        <Card>
+      {creatorData !== undefined ?
+        <Card className="card">
           <CardContent className="content">
             <div className="title">
-              <h3>{fname} {lname}</h3>
-              <p>date: {date}</p>
+              <h3> {name} </h3>
+              <p>date: {date.getMonth()}/{date.getDate()}/{date.getFullYear()}</p>
             </div>
-            <p>Class taught by: {userName}</p>
+            <p>Class taught by: {creatorData.fname} {creatorData.lname} </p>
             <p>Level of difficulty: {level}</p>
             <p>Location: {location}</p>
             <p>Time: {time}</p>
@@ -53,7 +50,7 @@ function Upcoming(props) {
               onClick={reserveSpot}
             >
               Reserve your spot!
-      </Button>
+            </Button>
           </CardActions>
         </Card>
         :
