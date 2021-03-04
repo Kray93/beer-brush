@@ -47,14 +47,30 @@ function App() {
     <Router>
     <div className="App">
       <Navbar activeUser={activeUser} />
-      <Route exact path="/" component={Splash} />
-      <Route exact path="/about" component={Splash} />
-      <Route exact path="/login" component={Login} onReturn={(e)=>loginSuccess(e)} />
-      <Route exact path="/register" component={Register} />
-      <Route exact path="/home" component={Home} />
-      <Route exact path="/gallery" component={Gallery} />
-      <Route ecact path="/classes" component={Classes} />
-      <Route exact path="/student" component={StudentProfile}/>
+      <Route exact path="/" component={Splash} >
+        <Splash />
+      </Route>
+      <Route exact path="/about" component={Splash} >
+        <Splash />
+      </Route>
+      <Route exact path="/login" onReturn={(e)=>loginSuccess(e)}>
+        <Login />
+      </Route>
+      <Route exact path="/register">
+        <Register />
+      </Route>
+      <Route exact path="/home">
+        <Home />
+      </Route>
+      <Route exact path="/gallery">
+        <Gallery />
+      </Route>
+      <Route ecact path="/classes">
+        <Classes />
+      </Route>
+      <Route exact path="/student">
+        <StudentProfile />
+      </Route>
       <Route exact path="/instructor">
         <Instructor activeUser={activeUser} />
       </Route>
