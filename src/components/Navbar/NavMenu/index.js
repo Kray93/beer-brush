@@ -51,10 +51,10 @@ export default function MenuListComposition(props) {
         }
         prevOpen.current = open;
     }, [open]);
-    const history = useHistory();
-    const clickGallery = (e) => {
+
+    const clickHome = (e) => {
         e.preventDefault();
-        history.push("/gallery");
+        history.push("/home");
         handleClose(e);
     }
     const clickAbout = (e) => {
@@ -67,9 +67,10 @@ export default function MenuListComposition(props) {
         history.push("/classes");
         handleClose(e);
     }
-    const clickHome = (e) => {
+    const history = useHistory();
+    const clickGallery = (e) => {
         e.preventDefault();
-        history.push("/home");
+        history.push("/gallery");
         handleClose(e);
     }
     const clickInstructor = (e) => {
@@ -88,20 +89,20 @@ export default function MenuListComposition(props) {
         if (isArtist===false) {
             return <div>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
+                <MenuItem onClick={clickHome} >Home</MenuItem>
                     <MenuItem onClick={clickAbout}>About Us</MenuItem>
                     <MenuItem onClick={clickClasses} >Classes</MenuItem>
-                    <MenuItem onClick={clickHome} >Home</MenuItem>
+                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
                     <MenuItem onClick={clickInstructor} >Instructor</MenuItem>
                 </MenuList>
             </div>
         } else {
             return <div>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
+                <MenuItem onClick={clickHome} >Home</MenuItem>
                     <MenuItem onClick={clickAbout}>About Us</MenuItem>
                     <MenuItem onClick={clickClasses} >Classes</MenuItem>
-                    <MenuItem onClick={clickHome} >Home</MenuItem>
+                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
                     <MenuItem onClick={clickStudent} >Student</MenuItem>
                     
                 </MenuList>

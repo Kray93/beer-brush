@@ -39,13 +39,8 @@ function App() {
     showNav();
   }, [isLoggedIn]);
 
-<<<<<<< HEAD
-  const loginSuccess = ()=>{
-    console.log("success yo");
-=======
   const loginSuccess = () => {
     console.log("success yo!");
->>>>>>> 1f4394e46211cf2c319c1630640f7f580267c57f
     setIsLoggedIn(true);
   }
 
