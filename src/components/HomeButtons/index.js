@@ -3,7 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { useHistory } from 'react-router-dom';
-import grey from '@material-ui/core/colors/red';
+import { grey } from '@material-ui/core/colors';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -14,26 +15,29 @@ const useStyles = makeStyles((theme) => ({
     },
     butGrid: {
         "& > *": {
+            border: '2px solid', 
+            borderColor:'black',
             marginLeft: 10,
             marginRight: 10,
             // Mobile View
             [theme.breakpoints.down('sm')]: {
-                margin:12,
+                margin:30,
             },
         },
     },
     but: {
         "& > *": {
             width: 175,
-            padding: 15,
+            padding: 4,
             // smaller screens/tablets
             [theme.breakpoints.down('sm')]: {
                 width:135,
-                padding:20,
+                padding:8,
             },
             // Mobile View
             [theme.breakpoints.down('xs')]: {
-                padding:40,
+                paddingLeft:55,
+                paddingRight:55,
             },
         },
     },
@@ -42,19 +46,19 @@ const useStyles = makeStyles((theme) => ({
 export default function ContainedButtons() {
     const history = useHistory();
     const classes = useStyles();
-    // const clickMypage = (e) => {
-    //     // if JWT token and login creds pass for student go to student page
-    //     if (condition) {
-    //         e.preventDefault();
-    //         history.push("/student");
-    //     // if JWT token and login creds pass for student go to instructor page
-    //     } else if (condition) {
-    //         e.preventDefault();
-    //         history.push("/instructor");
-    //     } else {
-    //         return;
-    //     }
-    // }
+    const clickMypage = (e) => {
+        // if JWT token and login creds pass for student go to student page
+        if (condition) {
+            e.preventDefault();
+            history.push("/student");
+        // if JWT token and login creds pass for student go to instructor page
+        } else if (condition) {
+            e.preventDefault();
+            history.push("/instructor");
+        } else {
+            return;
+        }
+    }
     const clickClasses = (e) => {
         e.preventDefault();
         history.push("/classes");
@@ -73,10 +77,8 @@ export default function ContainedButtons() {
                 <Grid className={classes.butGrid} container item justify="center" sm={3} >
                     <Button 
                     onClick={clickClasses} 
-                    className={classes.but} 
-                    variant='contained' 
-                    style={{ color: grey[50] }}
-                    style={{ backgroundColor:"#7b0d00" }}  
+                    className={classes.but}
+                    style={{ color: grey[800] }}  
                     >
                         Classes
                     </Button>
@@ -84,10 +86,8 @@ export default function ContainedButtons() {
                 <Grid className={classes.butGrid} container item justify="center" sm={3} >
                     <Button 
                     // onClick={clickMypage} 
-                    className={classes.but} 
-                    variant='contained' 
-                    style={{ color: grey[50] }}
-                    style={{ backgroundColor:"#7b0d00" }} 
+                    className={classes.but}
+                    style={{ color: grey[800] }} 
                     >
                         My Page
                     </Button>
@@ -96,9 +96,7 @@ export default function ContainedButtons() {
                     <Button 
                     onClick={clickAbout}
                     className={classes.but} 
-                    variant='contained' 
-                    style={{ color: grey[50] }}
-                    style={{ backgroundColor:"#7b0d00" }}
+                    style={{ color: grey[800] }}
                     >
                         About Us
                     </Button>
@@ -107,9 +105,7 @@ export default function ContainedButtons() {
                     <Button 
                     onClick={clickGallery}
                     className={classes.but} 
-                    variant='contained' 
-                    style={{ color:"#fffff" }}
-                    style={{ backgroundColor:"#7b0d00" }} 
+                    style={{ color: grey[800] }}
                     >
                         Gallery
                     </Button>
