@@ -24,6 +24,22 @@ const selectedClasses = [];
 function StudentProfile(props) {
   const [userData, setUserData] = useState()
   const [view, setView] = useState("overview")
+  const [form, setForm] = useState({
+    title: "",
+    dateStarted: "",
+    dateFinished: "",
+    materialUsed: "wood",
+    categories: "woodWorking",
+    forSale: false,
+    isPublic: false
+
+  })
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    console.log(name, value)
+    setForm({ ...form, [name]: value })
+  }
   // const [images, setImages] = useState([]);
 
   // const beginUpload = tag => {
@@ -52,7 +68,7 @@ function StudentProfile(props) {
   useEffect(() => {
     let token = JSON.parse(localStorage.getItem("activeUser"));
     token = token.data.token;
-
+    // console.log("token" + token)
     axios.get(`http://localhost:3001/api/user/`, {
       headers: {
         "authorization": `Bearer ${token}`
@@ -71,15 +87,15 @@ function StudentProfile(props) {
   const addProjectSubmit = (e) => {
     e.preventDefault()
     let data = {
-      title: e.target.title.value,
-      artistId: 'Tyler',
-      dateStarted: e.target.dateStarted.value,
-      dateFinished: e.target.dateFinished.value,
-      description: e.target.desc.value,
-      materialUsed: e.target.materialUsed.value,
-      category: e.target.categories.value,
-      forSale: e.target.forSale.value,
-      isPublic: e.target.isPublic.value,
+      title: form.title,
+      artistId: 1,
+      dateStarted: form.dateStarted,
+      dateFinished: form.dateFinished,
+      description: form.description,
+      materialUsed: form.materialUsed,
+      category: form.categories,
+      forSale: form.forSale,
+      isPublic: form.isPublic
     }
 
     console.log(data);
@@ -89,7 +105,7 @@ function StudentProfile(props) {
     axios.post('http://localhost:3001/api/project/newProject', data, {
       headers: {
         "authorization": `Bearer ${token}`
-    }
+      }
     }).then(resp => {
       console.log(resp);
     }).catch(err => console.log(err))
@@ -130,17 +146,17 @@ function StudentProfile(props) {
         <div className="addProjectFormBox">
 
           <form className="addProjectForm" onSubmit={addProjectSubmit}>
-            <input type="text" name="title" placeholder="title" />
-            <input type="date" name="dateStarted" placeholder="date started" />
-            <input type="date" name="dateFinished" placeholder="date finished" />
-            <textarea name="desc" cols="30" rows="10"></textarea>
-            <select name="materialUsed">
+            <input type="text" name="title" placeholder="title" value={form.title} onChange={handleInputChange} />
+            <input type="date" name="dateStarted" placeholder="date started" value={form.dateStarted} onChange={handleInputChange} />
+            <input type="date" name="dateFinished" placeholder="date finished" value={form.dateFinished} onChange={handleInputChange} />
+            <textarea name="description" cols="30" rows="10" value={form.description} onChange={handleInputChange}></textarea>
+            <select name="materialUsed" value={form.materialUsed} onChange={handleInputChange}>
               <option value="wood">Wood</option>
               <option value="metal">Metal</option>
               <option value="canvas">Canvas</option>
-              <option value="ceramics">ceramics</option>
+              <option value="ceramics">Ceramics</option>
             </select>
-            <select name="categories">
+            <select name="categories" value={form.categories} onChange={handleInputChange}>
               <option value="woodWorking">Wood Working</option>
               <option value="metalWorking">Metal Working</option>
               <option value="sewing">Sewing</option>
@@ -148,11 +164,11 @@ function StudentProfile(props) {
             </select>
             <div>
               <label htmlFor="forSale">For Sale:</label>
-              <input type="checkbox" name="forSale" />
+              <input type="checkbox" name="forSale" value={form.forSale} onChange={handleInputChange} />
             </div>
             <div>
               <label htmlFor="isPublic">Make it public:</label>
-              <input type="checkbox" name="isPublic" />
+              <input type="checkbox" name="isPublic" value={form.isPublic} onChange={handleInputChange} />
             </div>
             {/* <CloudinaryContext cloudName="brush">
             <button onClick={() => beginUpload()}>Upload Image</button>

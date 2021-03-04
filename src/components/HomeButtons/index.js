@@ -8,7 +8,7 @@ import grey from '@material-ui/core/colors/red';
 const useStyles = makeStyles((theme) => ({
     root: {
         "& > *": {
-            paddingTop: 10,  
+            paddingTop: 10,
         },
     },
     butGrid: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
             marginRight: 10,
             // Mobile View
             [theme.breakpoints.down('sm')]: {
-                margin:12,
+                margin: 12,
             },
         },
     },
@@ -27,12 +27,12 @@ const useStyles = makeStyles((theme) => ({
             padding: 15,
             // smaller screens/tablets
             [theme.breakpoints.down('sm')]: {
-                width:135,
-                padding:20,
+                width: 135,
+                padding: 20,
             },
             // Mobile View
             [theme.breakpoints.down('xs')]: {
-                padding:40,
+                padding: 40,
             },
         },
     },
@@ -70,41 +70,31 @@ export default function ContainedButtons() {
         <div className={classes.root}>
             <Grid container justify="center" >
                 <Grid className={classes.butGrid} container item justify="center" sm={3} >
-                    <Button 
-                    onClick={clickClasses} 
-                    className={classes.but} 
-                    variant='contained' 
-                    style={{ color: grey[50], backgroundColor:"#7b0d00" }} 
+                    <Button
+                        onClick={clickClasses}
+                        className={classes.but}
+                        variant='contained'
+                        style={{ color: grey[50], backgroundColor: "#7b0d00" }}
                     >
                         Classes
                     </Button>
                 </Grid>
-                <Grid className={classes.butGrid} container item justify="center" sm={3} >
-                    <Button 
-                    // onClick={clickMypage} 
-                    className={classes.but} 
-                    variant='contained' 
-                    style={{ color: grey[50], backgroundColor:"#7b0d00" }}
-                    >
-                        My Page
-                    </Button>
-                </Grid>
                 <Grid className={classes.butGrid} container item justify="center" sm={3}>
-                    <Button 
-                    onClick={clickAbout}
-                    className={classes.but} 
-                    variant='contained' 
-                    style={{ color: grey[50], backgroundColor:"#7b0d00" }}
+                    <Button
+                        onClick={clickAbout}
+                        className={classes.but}
+                        variant='contained'
+                        style={{ color: grey[50], backgroundColor: "#7b0d00" }}
                     >
                         About Us
                     </Button>
                 </Grid>
                 <Grid className={classes.butGrid} container item justify="center" sm={3}>
-                    <Button 
-                    onClick={clickGallery}
-                    className={classes.but} 
-                    variant='contained' 
-                    style={{ color:grey[50], backgroundColor:"#7b0d00" }}
+                    <Button
+                        onClick={clickGallery}
+                        className={classes.but}
+                        variant='contained'
+                        style={{ color: grey[50], backgroundColor: "#7b0d00" }}
                     >
                         Gallery
                     </Button>
