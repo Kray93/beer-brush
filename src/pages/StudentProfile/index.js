@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../../components/Navbar";
 import ProfileGrid from "../../components/ProfileGrid";
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
@@ -19,61 +18,56 @@ function createData(name, Date, Time, Instructor) {
 const selectedClasses = [];
 
 function StudentProfile() {
-
-
-
   const artistName = () => {
     let activeUser = JSON.parse(localStorage.getItem("activeUser"));
     let fname = activeUser.data.user.fname;
-      if (activeUser.data.user.isArtist===true){
-        return fname;
-      }
+    if (activeUser.data.user.isArtist === true) {
+      return fname;
+    }
   }
 
   return (
     <div>
       <Grid container justify='center'>
         <div className='name'>
-            <h1>Hello, {artistName()}</h1>  
+          <h1>Hello, {artistName()}</h1>
         </div>
       </Grid>
-        <Button className="addBtn" variant="contained">Add Project</Button>
+      <Button className="addBtn" variant="contained">Add Project</Button>
 
       <Grid container justify='center'>
         <h2 className='schedule' >Class Schedule</h2>
         <TableContainer component={Paper} className='tableCont'>
-      <Table className='table' aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Class:</TableCell>
-            <TableCell align="right">Date:</TableCell>
-            <TableCell align="right">Time:</TableCell>
-            <TableCell align="right">Instructor:</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {selectedClasses.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.Date}</TableCell>
-              <TableCell align="right">{row.Time}</TableCell>
-              <TableCell align="right">{row.Instructor}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          <Table className='table' aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Class:</TableCell>
+                <TableCell align="right">Date:</TableCell>
+                <TableCell align="right">Time:</TableCell>
+                <TableCell align="right">Instructor:</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {selectedClasses.map((row) => (
+                <TableRow key={row.name}>
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="right">{row.Date}</TableCell>
+                  <TableCell align="right">{row.Time}</TableCell>
+                  <TableCell align="right">{row.Instructor}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Grid>
-      
-
       <Grid container justify='center'>
         <ProfileGrid
-        //test props hard code
-        image="../../../public/assets/images/cda.jpg"
-        title="picture"
-        description="this is a birds eye view"
+          //test props hard code
+          image="../../../public/assets/images/cda.jpg"
+          title="picture"
+          description="this is a birds eye view"
         />
       </Grid>
     </div>

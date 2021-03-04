@@ -25,7 +25,6 @@ function Upcoming(props) {
   const reserveSpot = (e) => {
     console.log(e.target);
     // get currentLogged in user
-
   }
 
   return (

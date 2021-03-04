@@ -15,8 +15,8 @@ import Navbar from './components/Navbar';
 
 function App() {
   const [activeUser, setActiveUser] = useState(null);
-
-  const [userInfo, setUserInfo] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [userInfo, setUserInfo] = useState();
   
   const confirmation = () => {
     let token = JSON.parse(localStorage.getItem("activeUser"));
@@ -35,26 +35,33 @@ function App() {
   }
   useEffect(confirmation, []);
 
+  useEffect(()=>{
+    showNav();
+  },[isLoggedIn]);
 
   const history = useHistory();
-  const loginSuccess = (e)=>{
+  const loginSuccess = ()=>{
     console.log("success yo");
-    console.log(e);
+    setIsLoggedIn(true);
     history.push(`/home`);
+  }
+
+  const showNav = ()=>{
+    return <Navbar activeUser={activeUser} />
   }
 
   return (
     <Router>
     <div className="App">
-      <Navbar activeUser={activeUser} />
+      {showNav()}
       <Route exact path="/" component={Splash} >
         <Splash />
       </Route>
-      <Route exact path="/about" component={Splash} >
+      <Route exact path="/about" component={Splash}>
         <Splash />
       </Route>
-      <Route exact path="/login" onReturn={(e)=>loginSuccess(e)}>
-        <Login />
+      <Route exact path="/login" >
+        <Login onReturn={(e)=>loginSuccess(e)} />
       </Route>
       <Route exact path="/register">
         <Register />

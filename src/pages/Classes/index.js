@@ -79,8 +79,6 @@ function Classes() {
                         
                         {content()}
                         {/* <Upcoming /> */}
-
-
                     </Grid>
                 </MuiPickersUtilsProvider>
             </Container>

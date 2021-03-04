@@ -1,8 +1,6 @@
 import React from 'react'
 import Grid from "@material-ui/core/Grid";
 import "./style.css";
-import Navbar from '../../components/Navbar';
-
 
 function Splash() {
     return (
