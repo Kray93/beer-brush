@@ -1,4 +1,3 @@
-import React from "react";
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import ProfileGrid from "../../components/ProfileGrid";
@@ -20,7 +19,7 @@ function createData(name, Date, Time, Instructor) {
 
 const selectedClasses = [];
 
-function StudentProfile() {
+function StudentProfile(props) {
   const [userData, setUserData] = useState()
   const [view, setView] = useState("overview")
 

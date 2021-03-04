@@ -45,7 +45,7 @@ export default function Navbar(props) {
     // TODO: check creds/token to display NAVMENU on about page
     const loginCreds = () => {
         let activeUser = props.activeUser;
-        console.log(activeUser);
+        // console.log(activeUser);
         if (activeUser) {
             return (
                 <div className={classes.root}>
