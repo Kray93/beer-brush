@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
         position: "sticky",
-        top: 0
+        top: 0,
+        zIndex:"2500"
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -52,10 +53,8 @@ export default function Navbar(props) {
                     <AppBar style={{ background: grey[50] }} position="static">
                         <Toolbar>
                             <MenuListComposition activeUser={activeUser} />
-
                             <img className={classes.logo} src={logo} align="center" alt="logo" />
-
-                            <Button style={{ color: grey[900] }} onClick={handleLogout} color="inherit" >Logout</Button>
+                            <Button style={{ color: grey[50] }} onClick={handleLogout} color="inherit" >Logout</Button>
                         </Toolbar>
                     </AppBar>
                 </div>
@@ -65,14 +64,16 @@ export default function Navbar(props) {
                 <div className={classes.root}>
                     <AppBar style={{ background: grey[50] }} position="static">
                         <Toolbar>
-{/*
-                            <img className={classes.logo} src={logo} align="center" />
-                            <Button className="color" onClick={handleLogin} color="inherit">Login</Button> */}
+                            <MenuListComposition/>
                         <img className={classes.logo} src={logo} align="center" alt="logo" />
-                            <Button className="color" onClick={handleLogin} >Login</Button>
-
-                            <p className="color">|</p>
-                            <Button className="color" onClick={handleRegister} >Register</Button>
+                           <div className= "wtf">
+                           <Button style={{ color: grey[900] }} className="color" onClick={handleLogin} color="inherit">
+                                <div className="color">Login</div>
+                                </Button>
+                            <div className="color">|</div>
+                            <Button style={{ color: grey[900] }}  onClick={handleRegister} color="inherit">
+                                <div className="color">Register</div></Button>
+                           </div>
                         </Toolbar>
                     </AppBar>
                 </div>

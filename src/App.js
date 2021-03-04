@@ -11,6 +11,8 @@ import Splash from './pages/Splash';
 import Instructor from './pages/instructorProfile'
 import axios from 'axios';
 import Navbar from './components/Navbar';
+import BottomAppBar from "./components/Footer";
+
 
 function App() {
   const [activeUser, setActiveUser] = useState(null);
@@ -54,6 +56,7 @@ function App() {
       {activeUser !== undefined ?
         <div className="App">
           {showNav()}
+          <div>
           <Route exact path="/" component={Splash} >
             <Splash activeUser={activeUser} />
           </Route>
@@ -84,6 +87,8 @@ function App() {
           <Route exact path="/instructor">
             <Instructor activeUser={activeUser} />
           </Route>
+          </div>
+          <BottomAppBar/>
         </div>
         :
         <p>Loading...</p>
