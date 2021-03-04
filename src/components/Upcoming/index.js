@@ -1,37 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import './style.css'
+import axios from 'axios';
 
-function Upcoming() {
+function Upcoming(props) {
+  const {classId, name, date, level, location, recurring, time, userId, duration } = props.data
+  const [creatorData, setCreatorData] = useState()
+
+  useEffect(() => {
+    // get the user who posted this.
+    axios.get(`http://localhost:3001/api/user/get/${userId}`)
+      .then(resp => {
+        console.log(resp);
+        if (resp) {
+          setCreatorData(resp.data.data)
+        }
+      })
+  }, [])
+
+  const reserveSpot = (e) => {
+    console.log(e.target.value);
+    // get currentLogged in user
+    axios.post('')
+
+  }
 
   return (
-      <>
-      <Grid container justify= "center">
-        <h3>Upcoming Events</h3>
-      </Grid>
-    <Card>
-      <CardContent>
-        <ul>
-            <li>3/4/21: beer-brush</li>
-            <li>3/5/21: skull night</li>
-            <li>3/6/21: flames</li>
-        </ul>
-      </CardContent>
-      <CardActions>
-        <Button 
-          variant='contained' 
-          color='primary' 
-          size="small"
-          >
-            Reserve your spot!
-        </Button>
-      </CardActions>
-    </Card>
-    </>
+    <div>
+      {creatorData !== undefined ?
+        <Card className="card">
+          <CardContent className="content">
+            <div className="title">
+              <h3> {name} </h3>
+              <p>date: {date.getMonth()}/{date.getDate()}/{date.getFullYear()}</p>
+            </div>
+            <p>Class taught by: {creatorData.fname} {creatorData.lname} </p>
+            <p>Level of difficulty: {level}</p>
+            <p>Location: {location}</p>
+            <p>Time: {time}</p>
+            <p>recurring: {recurring}</p>
+          </CardContent>
+          <CardActions>
+            <button className="btn" value={classId} onClick={reserveSpot}>Reserve Your Spot!</button>
+          </CardActions>
+        </Card>
+        :
+        <p>No Classes Registered</p>
+      }
+
+    </div>
   );
 }
 

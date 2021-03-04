@@ -1,63 +1,72 @@
-import React, { useState } from 'react'
-import Navbar from '../../components/Navbar'
-import {Link} from "react-router-dom"
+import React, { useState, useEffect } from 'react'
+import { Link } from "react-router-dom"
 
 import './style.css'
 import axios from 'axios'
 
-export default function Index() {
+export default function Index(props) {
 
-    const [contentBtn, setContentBtn] = useState('upcomingClasses')
-    const [allClasses, setAllClass] = useState({
-        data: [{
-            name: "Tyler's class",
-            level: 1,
-            date: "12/1/2021",
-            time: "17:00",
-            duration: "2hr",
-            price: "free",
-            location: "Yo momma's house",
-        },
-        {
-            name: "Erik's class",
-            level: 99,
-            date: "12/1/2021",
-            time: "18:00",
-            duration: "1hr",
-            price: "$1,000,000",
-            location: "Yo dad's house",
-        },
-        {
-            name: "Kevin's class",
-            level: 5,
-            date: "12/1/2021",
-            time: "06:00",
-            duration: "30 Min",
-            price: "$1",
-            location: "My house",
-        },
-        {
-            name: "Claire's class",
-            level: 15,
-            date: "12/1/2021",
-            time: "03:00",
-            duration: "1.5hr",
-            price: "$10",
-            location: "The School House",
-        },
-    ]
-    })
+    const [contentBtn, setContentBtn] = useState()
+    const [allClasses, setAllClasses] = useState()
+
+ 
+    useEffect(() => {
+        // get active user id
+        const activeUser = props.activeUser;
+        let activeUserId;
+        if (activeUser) {
+            activeUserId = activeUser.id;
+            console.log(activeUserId);
+        }
+
+        // get all of current user's classes
+        axios.get(`http://localhost:3001/api/classes/${activeUserId}`)
+            .then(resp => {
+                console.log(resp);
+                setAllClasses({ data: resp.data.data })
+            }).catch(err => console.log(err))
+    }, [contentBtn])
+
+    useEffect(() => {
+        setContentBtn("upcomingClasses")
+    },[])
+
 
     const newClassSubmit = e => {
-        e.preventDefault('http://localhost:3001/api/classes/new')
-        let name = e.target.name.value
-        let level = e.target.level.value
-        let date = e.target.date.value
-        let time = e.target.time.value
-        let duration = e.target.duration.value
-        let recurring = e.target.recurring.value
+        e.preventDefault()
 
-        axios.post(``)
+        const activeUser = props.activeUser
+        const activeUserId = activeUser.id
+
+        const durationHr = e.target.durationHr.value
+        const durationMin = e.target.durationMin.value
+
+        let totalDuration = (durationHr * 1000 * 60 * 60) + (durationMin * 1000 * 60)
+
+        let data = {
+            name: e.target.name.value,
+            level: e.target.level.value,
+            date: e.target.date.value,
+            time: e.target.time.value,
+            duration: totalDuration,
+            recurring: e.target.recurring.value,
+            location: e.target.location.value,
+            userId: activeUserId
+        }
+
+        console.log(data);
+        let token = JSON.parse(localStorage.getItem("activeUser"));
+        token = token.data.token;
+        axios.post(`http://localhost:3001/api/classes/new`, data, {
+            headers: {
+                "authorization": `Bearer ${token}`
+            }
+        })
+            .then(resp => {
+                console.log(resp);
+                setContentBtn("upcomingClasses")
+            })
+            .catch(err => console.log(err))
     }
 
     const handleChange = e => {
@@ -65,86 +74,91 @@ export default function Index() {
     }
 
     const content = e => {
-        if(contentBtn === 'upcomingClasses'){
-            return <div>
-            <div className="title">
-                <h1>Upcoming Class</h1>
-            </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {allClasses.data.map(item => {
-                            return <tr>
-                                <td>{item.name}</td>
-                                <td>{item.date}</td>
-                                <td>{item.time}</td>
-                                <td><Link>Edit</Link> | <Link>Delete</Link></td>
+        if (contentBtn === 'upcomingClasses') {
+            return <div className="InstructorUpcomingClassesBox">
+                <div className="title">
+                    <h1>Upcoming Class</h1>
+                </div>
+                {allClasses === undefined ? <p>Loading...</p> :
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Actions</th>
                             </tr>
-                        })}
-                    </tbody>
-                </table>
-        </div>
-        } else if(contentBtn === 'newClass'){
+                        </thead>
+                        <tbody>
+                            {allClasses.data.map(item => {
+                                return <tr>
+                                    <td>{item.name}</td>
+                                    <td>{item.date}</td>
+                                    <td>{item.time}</td>
+                                    <td><Link>Edit</Link> | <Link>Delete</Link></td>
+                                </tr>
+                            })}
+                        </tbody>
+                    </table>
+                }
+            </div>
+        } else if (contentBtn === 'newClass') {
             return <div>
                 <div className="title">
                     <h1>Add New Class</h1>
                 </div>
+                <div className="NewClassformBox">
+
+                
                 <form className="newClassForm" onSubmit={newClassSubmit}>
                     <div>
                         <label htmlFor="name">Name of Class: </label>
-                        <input type="text" name="name" placeholder="Class Name"/>
+                        <input type="text" name="name" placeholder="Class Name" />
                     </div>
-                    <hr/>
+                    <hr />
                     <div>
                         <label htmlFor="level">Difficulty Level: </label>
-                        <input type="Number" name="level" placeholder="Level"/>
+                        <input type="Number" name="level" placeholder="Level" />
                     </div>
-                    <hr/>
+                    <hr />
                     <div>
                         <label htmlFor="date">Date: </label>
-                        <input type="date" name="date" placeholder="date"/>
+                        <input type="date" name="date" placeholder="date" />
                     </div>
-                    <hr/>
+                    <hr />
                     <div>
                         <label htmlFor="time">Time: </label>
-                        <input type="time" name="time" placeholder="time"/>
+                        <input type="time" name="time" placeholder="time" />
                     </div>
-                    <hr/>
+                    <hr />
                     <p>Duration</p>
                     <div className="duration">
-                        <input type="number" name="duration" placeholder="Hours"/>
-                        <input type="number" name="duration" placeholder="Minutes"/>
+                        <input type="number" name="durationHr" placeholder="Hours" />
+                        <input type="number" name="durationMin" placeholder="Minutes" />
                     </div>
-                    <hr/>
+                    <hr />
                     <div className="recurringRadioBtn">
                         <p>Is this class recurring?</p>
                         <label htmlFor="no">No</label>
-                        <input type="radio" id="no" name="recurring" value="no" placeholder="recurring"/>
+                        <input type="radio" id="no" name="recurring" value={false} placeholder="recurring" />
                         <label htmlFor="yes">Yes</label>
-                        <input type="radio" id="yes" name="recurring" value="yes" placeholder="recurring"/>
+                        <input type="radio" id="yes" name="recurring" value={true} placeholder="recurring" />
                     </div>
 
-                    <input type="text" name="location" placeholder="location"/>
+                    <input type="text" name="location" placeholder="location" />
                     <button className="btn">Create!</button>
                 </form>
+                </div>
             </div>
         }
     }
 
     return (
         <div>
-            <Navbar/>
             <h1>Instructor</h1>
             <div className="btns">
-                <button className="btn" value="newClass" onClick={(e) => handleChange(e)}>New Class</button>
                 <button className="btn" value="upcomingClasses" onClick={(e) => handleChange(e)}>Upcoming Class</button>
+                <button className="btn" value="newClass" onClick={(e) => handleChange(e)}>New Class</button>
             </div>
             <div className="content">
                 {content()}

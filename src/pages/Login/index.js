@@ -15,7 +15,6 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import './style.css'
-import PreLogNav from '../../components/PreLogNav';
 
 function Login(props) {
     const useStyles = makeStyles((theme) => ({
@@ -69,9 +68,8 @@ function Login(props) {
                 console.log(res);
                 if (res.status===200) {
                     localStorage.setItem("activeUser", JSON.stringify(res.data));
+                    props.onReturn()
                     history.push("/home")
-                //     console.log(props);
-                //    return props.onReturn(res.data);
                 }
                 
             }).catch(err => {
@@ -83,14 +81,10 @@ function Login(props) {
         history.push(`/about`)
     };
 
-
-
-
     return (
         <>
-            <PreLogNav />
-            <CssBaseline />
-            <Container className="container" maxWidth="xs">
+        <CssBaseline />
+           <Container  className="container" maxWidth="xs">
                 <h2>Login</h2>
                 <form onSubmit={handleSubmit}>
                     <Grid container direction="column"

@@ -11,7 +11,6 @@ import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function MenuListComposition() {
+export default function MenuListComposition(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
@@ -52,10 +51,10 @@ export default function MenuListComposition() {
         }
         prevOpen.current = open;
     }, [open]);
-    const history = useHistory();
-    const clickGallery = (e) => {
+
+    const clickHome = (e) => {
         e.preventDefault();
-        history.push("/gallery");
+        history.push("/home");
         handleClose(e);
     }
     const clickAbout = (e) => {
@@ -68,9 +67,10 @@ export default function MenuListComposition() {
         history.push("/classes");
         handleClose(e);
     }
-    const clickHome = (e) => {
+    const history = useHistory();
+    const clickGallery = (e) => {
         e.preventDefault();
-        history.push("/home");
+        history.push("/gallery");
         handleClose(e);
     }
     const clickInstructor = (e) => {
@@ -84,27 +84,27 @@ export default function MenuListComposition() {
         handleClose(e);
     }
     const conditionalMenu = () => {
-        let activeUser = JSON.parse(localStorage.getItem("activeUser"));
-        let isArtist = activeUser.data.user.isArtist;
-        if (isArtist===false) {
+        let activeUser = props.activeUser
+        let isArtist = activeUser.isArtist;
+        if (isArtist === false) {
             return <div>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
+                    <MenuItem onClick={clickHome} >Home</MenuItem>
                     <MenuItem onClick={clickAbout}>About Us</MenuItem>
                     <MenuItem onClick={clickClasses} >Classes</MenuItem>
-                    <MenuItem onClick={clickHome} >Home</MenuItem>
-                    <MenuItem onClick={clickInstructor} >Instructor</MenuItem>
+                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
+                    <MenuItem onClick={clickInstructor} >My Page</MenuItem>
                 </MenuList>
             </div>
         } else {
             return <div>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
+                    <MenuItem onClick={clickHome} >Home</MenuItem>
                     <MenuItem onClick={clickAbout}>About Us</MenuItem>
                     <MenuItem onClick={clickClasses} >Classes</MenuItem>
-                    <MenuItem onClick={clickHome} >Home</MenuItem>
-                    <MenuItem onClick={clickStudent} >Student</MenuItem>
-                    
+                    <MenuItem onClick={clickGallery}>Gallery</MenuItem>
+                    <MenuItem onClick={clickStudent} >My Page</MenuItem>
+
                 </MenuList>
             </div>
         }
@@ -119,7 +119,7 @@ export default function MenuListComposition() {
                     aria-haspopup="true"
                     onClick={handleToggle}
                 >
-                    <MenuIcon style={{ color: grey[50] }} />
+                    <MenuIcon style={{ color: grey[900] }} />
                 </Button>
                 <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
@@ -129,7 +129,7 @@ export default function MenuListComposition() {
                         >
                             <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
-                                {conditionalMenu()}
+                                    {conditionalMenu()}
                                 </ClickAwayListener>
                             </Paper>
                         </Grow>

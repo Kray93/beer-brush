@@ -17,7 +17,6 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import './style.css'
-import PreLogNav from '../../components/PreLogNav';
 
 function Register() {
     const useStyles = makeStyles((theme) => ({
@@ -93,7 +92,6 @@ function Register() {
     };
     return (
         <>
-        <PreLogNav />
             <CssBaseline />
             <form onSubmit={handleSubmit}>
                 <Container className="container" maxWidth="xs">
