@@ -5,16 +5,19 @@ import { Link } from "react-router-dom"
 import './style.css'
 import axios from 'axios'
 
-export default function Index() {
+export default function Index(props) {
 
     const [contentBtn, setContentBtn] = useState('upcomingClasses')
     const [allClasses, setAllClass] = useState()
 
     useEffect(() => {
         // get active user id
-        const activeUser = JSON.parse(localStorage.getItem("activeUser"))
-        const activeUserId = activeUser.data.user.id
-        console.log(activeUserId);
+        const activeUser = props.activeUser;
+        let activeUserId;
+        if (activeUser) {
+            activeUserId = activeUser.id;
+            console.log(activeUserId);
+        }
 
         // get all of current user's classes
         axios.get(`http://localhost:3001/api/classes/${activeUserId}`)
@@ -28,8 +31,8 @@ export default function Index() {
     const newClassSubmit = e => {
         e.preventDefault()
 
-        const activeUser = JSON.parse(localStorage.getItem("activeUser"))
-        const activeUserId = activeUser.data.user.id
+        const activeUser = props.activeUser
+        const activeUserId = activeUser.id
 
         const durationHr = e.target.durationHr.value
         const durationMin = e.target.durationMin.value
@@ -46,8 +49,13 @@ export default function Index() {
             location: e.target.location.value,
             userId: activeUserId
         }
-
-        axios.post(`http://localhost:3001/api/classes/new`, data)
+        let token = JSON.parse(localStorage.getItem("activeUser"));
+        token = token.data.token;
+        axios.post(`http://localhost:3001/api/classes/new`, {
+            header: {
+                "authorization": `Bearer ${token}`
+            }
+        }, data)
             .then(resp => {
                 console.log(resp);
                 setContentBtn("upcomingClasses")
@@ -137,7 +145,6 @@ export default function Index() {
 
     return (
         <div>
-            <Navbar />
             <h1>Instructor</h1>
             <div className="btns">
                 <button className="btn" value="upcomingClasses" onClick={(e) => handleChange(e)}>Upcoming Class</button>

@@ -59,7 +59,6 @@ function Classes() {
 
     return (
         <div>
-            <Navbar />
             <Container className="container">
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <Grid container justify="space-around">

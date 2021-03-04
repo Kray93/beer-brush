@@ -7,7 +7,6 @@ import Navbar from '../../components/Navbar';
 function Splash() {
     return (
         <div>
-            <Navbar />
                 <Grid container justify= "center">
                     <h1>Welcome to Artisan's Lounge</h1>
                     <p className= "about">
