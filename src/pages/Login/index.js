@@ -88,7 +88,6 @@ function Login(props) {
 
     return (
         <>
-            <Navbar />
             <CssBaseline />
             <Container className="container" maxWidth="xs">
                 <h2>Login</h2>

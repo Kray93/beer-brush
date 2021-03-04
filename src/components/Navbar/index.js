@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Navbar() {
+export default function Navbar(props) {
     const classes = useStyles();
     const history = useHistory();
     const handleLogout = (e) => {
@@ -46,13 +46,14 @@ export default function Navbar() {
     }
     // TODO: check creds/token to display NAVMENU on about page
     const loginCreds = () => {
-        let activeUser = JSON.parse(localStorage.getItem("activeUser"));
+        let activeUser = props.activeUser;
+        console.log(activeUser);
         if (activeUser) {
             return (
                 <div className={classes.root}>
                     <AppBar style={{ background: grey[50] }} position="static">
                         <Toolbar>
-                            <MenuListComposition />
+                            <MenuListComposition activeUser={activeUser} />
                             <img className={classes.logo} src={logo} align="center" />
                             <Button style={{ color: grey[900] }} onClick={handleLogout} color="inherit" >Logout</Button>
                         </Toolbar>

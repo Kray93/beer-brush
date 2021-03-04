@@ -32,7 +32,6 @@ function StudentProfile() {
 
   return (
     <div>
-      <Navbar />
       <Grid container justify='center'>
         <div className='name'>
             <h1>Hello, {artistName()}</h1>  

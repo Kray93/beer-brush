@@ -93,7 +93,6 @@ function Register() {
     };
     return (
         <>
-        <Navbar />
             <CssBaseline />
             <form onSubmit={handleSubmit}>
                 <Container className="container" maxWidth="xs">
