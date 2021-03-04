@@ -9,7 +9,6 @@ import Home from "./pages/Home";
 import StudentProfile from "./pages/StudentProfile";
 import Splash from './pages/Splash';
 import Instructor from './pages/instructorProfile'
-import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import Navbar from './components/Navbar';
 
@@ -39,11 +38,9 @@ function App() {
     showNav();
   },[isLoggedIn]);
 
-  const history = useHistory();
   const loginSuccess = ()=>{
     console.log("success yo");
     setIsLoggedIn(true);
-    history.push(`/home`);
   }
 
   const showNav = ()=>{
