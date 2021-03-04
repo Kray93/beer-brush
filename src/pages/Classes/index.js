@@ -20,10 +20,6 @@ function Classes(props) {
     useEffect(() => {
         axios.get("http://localhost:3001/api/classes/all")
             .then(resp => {
-                // console.log(resp);
-                // const outcome = {
-                //     data: resp.data
-                // }
                 setAllClasses(resp.data.data)
             }).catch(err => {
                 console.log(err);
@@ -57,7 +53,8 @@ function Classes(props) {
                         recurring: aClass.recurring,
                         time: aClass.time,
                         duration: aClass.duration,
-                        name: aClass.name
+                        name: aClass.name,
+                        classId: aClass.id
                     }
 
                     return <div>
@@ -92,7 +89,6 @@ function Classes(props) {
                     <div className="upcoming-classes-box">
                         
                         {content()}
-                        {/* <Upcoming /> */}
                     </div>
                 </MuiPickersUtilsProvider>
             </Container>
