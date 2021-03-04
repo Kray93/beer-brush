@@ -50,6 +50,7 @@ function App() {
 
   return (
     <Router>
+
       {activeUser !== undefined ?
         <div className="App">
           {showNav()}
@@ -71,19 +72,23 @@ function App() {
           <Route exact path="/gallery">
             <Gallery activeUser={activeUser} />
           </Route>
-          <Route ecact path="/classes">
+          <Route exact path="/classes">
             <Classes activeUser={activeUser} />
           </Route>
           <Route exact path="/student">
+            <StudentProfile activeUser={activeUser} />
+          </Route>
+          <Route exact path="/project">
             <StudentProfile activeUser={activeUser} />
           </Route>
           <Route exact path="/instructor">
             <Instructor activeUser={activeUser} />
           </Route>
         </div>
-      :
-      <p>Loading...</p>
-    }
+        :
+        <p>Loading...</p>
+      }
+
     </Router>
   );
 }

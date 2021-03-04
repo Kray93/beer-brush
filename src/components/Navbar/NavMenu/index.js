@@ -86,25 +86,25 @@ export default function MenuListComposition(props) {
     const conditionalMenu = () => {
         let activeUser = props.activeUser
         let isArtist = activeUser.isArtist;
-        if (isArtist===false) {
+        if (isArtist === false) {
             return <div>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                <MenuItem onClick={clickHome} >Home</MenuItem>
+                    <MenuItem onClick={clickHome} >Home</MenuItem>
                     <MenuItem onClick={clickAbout}>About Us</MenuItem>
                     <MenuItem onClick={clickClasses} >Classes</MenuItem>
                     <MenuItem onClick={clickGallery}>Gallery</MenuItem>
-                    <MenuItem onClick={clickInstructor} >Instructor</MenuItem>
+                    <MenuItem onClick={clickInstructor} >My Page</MenuItem>
                 </MenuList>
             </div>
         } else {
             return <div>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                <MenuItem onClick={clickHome} >Home</MenuItem>
+                    <MenuItem onClick={clickHome} >Home</MenuItem>
                     <MenuItem onClick={clickAbout}>About Us</MenuItem>
                     <MenuItem onClick={clickClasses} >Classes</MenuItem>
                     <MenuItem onClick={clickGallery}>Gallery</MenuItem>
-                    <MenuItem onClick={clickStudent} >Student</MenuItem>
-                    
+                    <MenuItem onClick={clickStudent} >My Page</MenuItem>
+
                 </MenuList>
             </div>
         }
@@ -118,18 +118,18 @@ export default function MenuListComposition(props) {
                     aria-controls={open ? 'menu-list-grow' : undefined}
                     aria-haspopup="true"
                     onClick={handleToggle}
-                    >
+                >
                     <MenuIcon style={{ color: grey[900] }} />
                 </Button>
                 <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                     {({ TransitionProps, placement }) => (
                         <Grow
-                        {...TransitionProps}
-                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                            {...TransitionProps}
+                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
                         >
                             <Paper>
                                 <ClickAwayListener onClickAway={handleClose}>
-                                {conditionalMenu()}
+                                    {conditionalMenu()}
                                 </ClickAwayListener>
                             </Paper>
                         </Grow>

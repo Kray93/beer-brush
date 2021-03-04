@@ -52,7 +52,7 @@ function StudentProfile(props) {
   useEffect(() => {
     let token = JSON.parse(localStorage.getItem("activeUser"));
     token = token.data.token;
-
+    // console.log("token" + token)
     axios.get(`http://localhost:3001/api/user/`, {
       headers: {
         "authorization": `Bearer ${token}`
@@ -89,7 +89,7 @@ function StudentProfile(props) {
     axios.post('http://localhost:3001/api/project/newProject', data, {
       headers: {
         "authorization": `Bearer ${token}`
-    }
+      }
     }).then(resp => {
       console.log(resp);
     }).catch(err => console.log(err))
