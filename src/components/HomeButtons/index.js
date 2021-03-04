@@ -104,7 +104,7 @@ export default function ContainedButtons() {
                     onClick={clickGallery}
                     className={classes.but} 
                     variant='contained' 
-                    style={{ color:"#fffff", backgroundColor:"#7b0d00" }}
+                    style={{ color:grey[50], backgroundColor:"#7b0d00" }}
                     >
                         Gallery
                     </Button>
