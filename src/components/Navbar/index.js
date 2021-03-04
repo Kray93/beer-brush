@@ -53,7 +53,7 @@ export default function Navbar(props) {
                         <Toolbar>
                             <MenuListComposition activeUser={activeUser} />
 
-                            <img className={classes.logo} src={logo} align="center" alt="logo" />
+                            <a href="/home"><img className={classes.logo} src={logo} align="center" alt="logo" /></a>
 
                             <Button style={{ color: grey[900] }} onClick={handleLogout} color="inherit" >Logout</Button>
                         </Toolbar>

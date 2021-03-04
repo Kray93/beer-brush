@@ -29,7 +29,6 @@ function Classes(props) {
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
-
     const content = () => {
         if (allClasses === undefined) {
             return <div><p>Loading...</p></div>
@@ -58,7 +57,7 @@ function Classes(props) {
                     }
 
                     return <div>
-                        
+
                         <Upcoming data={data} />
                     </div>
                 })
@@ -93,6 +92,7 @@ function Classes(props) {
                 </MuiPickersUtilsProvider>
             </Container>
         </div>
+        
     )
 }
 export default Classes;

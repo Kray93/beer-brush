@@ -19,8 +19,8 @@ function App() {
 
   const confirmation = () => {
     let token = JSON.parse(localStorage.getItem("activeUser"));
-    if (token) token = token.data.token;
-    // console.log(token);
+    // if (token) token = token.data.token;
+    console.log(token);
     axios.get("http://localhost:3001/api/user/secretclub", {
       headers: {
         "authorization": `Bearer ${token}`
