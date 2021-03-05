@@ -13,6 +13,7 @@ import axios from 'axios';
 import Navbar from './components/Navbar';
 import BottomAppBar from "./components/Footer";
 
+const API_URL = "https://artisan-lounge-backend.herokuapp.com"
 
 function App() {
   const [activeUser, setActiveUser] = useState(null);
@@ -23,7 +24,7 @@ function App() {
     let token = JSON.parse(localStorage.getItem("activeUser"));
     if (token) token = token.data.token;
     // console.log(token);
-    axios.get("http://localhost:3001/api/user/secretclub", {
+    axios.get(API_URL+"/secretclub", {
       headers: {
         "authorization": `Bearer ${token}`
       }

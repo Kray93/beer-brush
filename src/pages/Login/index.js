@@ -16,6 +16,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import './style.css'
 
+const API_URL = "https://artisan-lounge-backend.herokuapp.com"
+
+
 function Login(props) {
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -63,7 +66,7 @@ function Login(props) {
         let userData = {
             uname: userName, 
             pw: password.password}
-        Axios.post(`http://localhost:3001/api/user/login`, userData)
+        Axios.post(API_URL+`/api/user/login`, userData)
             .then((res) => {
                 console.log(res);
                 if (res.status===200) {
