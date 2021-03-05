@@ -7,13 +7,16 @@ import Grid from '@material-ui/core/Grid';
 import './style.css'
 import axios from 'axios';
 
+const API_URL = "https://artisan-lounge-backend.herokuapp.com"
+
+
 function Upcoming(props) {
   const {classId, name, date, level, location, recurring, time, userId, duration } = props.data
   const [creatorData, setCreatorData] = useState()
 
   useEffect(() => {
     // get the user who posted this.
-    axios.get(`http://localhost:3001/api/user/get/${userId}`)
+    axios.get(API_URL+`/api/user/get/${userId}`)
       .then(resp => {
         console.log(resp);
         if (resp) {

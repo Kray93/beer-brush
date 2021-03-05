@@ -4,6 +4,9 @@ import { Link } from "react-router-dom"
 import './style.css'
 import axios from 'axios'
 
+const API_URL = "https://artisan-lounge-backend.herokuapp.com"
+
+
 export default function Index(props) {
 
     const [contentBtn, setContentBtn] = useState()
@@ -57,7 +60,7 @@ export default function Index(props) {
         console.log(data);
         let token = JSON.parse(localStorage.getItem("activeUser"));
         token = token.data.token;
-        axios.post(`http://localhost:3001/api/classes/new`, data, {
+        axios.post(API_URL+`/api/classes/new`, data, {
             headers: {
                 "authorization": `Bearer ${token}`
             }
