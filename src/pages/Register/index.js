@@ -18,6 +18,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import './style.css'
 
+const API_URL = "https://artisan-lounge-backend.herokuapp.com"
+
+
 function Register() {
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -63,7 +66,7 @@ function Register() {
             uname:userName,
             isArtist:userType
         }
-        Axios.post(`http://localhost:3001/api/user/register`,userData)
+        Axios.post(API_URL+`/api/user/register`,userData)
         .then((res) => {
             console.log(res);
               history.push(`/login`)

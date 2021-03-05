@@ -11,6 +11,8 @@ import {
 import Upcoming from '../../components/Upcoming';
 import axios from 'axios';
 
+const API_URL = "https://artisan-lounge-backend.herokuapp.com"
+
 
 function Classes(props) {
     const [selectedDate, setSelectedDate] = React.useState(new Date('2021-03-4'));
@@ -18,7 +20,7 @@ function Classes(props) {
     const { activeUser } = props
 
     useEffect(() => {
-        axios.get("http://localhost:3001/api/classes/all")
+        axios.get(API_URL+"/api/classes/all")
             .then(resp => {
                 setAllClasses(resp.data.data)
             }).catch(err => {

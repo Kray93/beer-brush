@@ -15,6 +15,9 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import axios from "axios";
 
+const API_URL = "https://artisan-lounge-backend.herokuapp.com"
+
+
 function createData(name, Date, Time, Instructor) {
   return { name, Date, Time, Instructor };
 }
@@ -69,7 +72,7 @@ function StudentProfile(props) {
     let token = JSON.parse(localStorage.getItem("activeUser"));
     token = token.data.token;
     // console.log("token" + token)
-    axios.get(`http://localhost:3001/api/user/`, {
+    axios.get(API_URL`/api/user/`, {
       headers: {
         "authorization": `Bearer ${token}`
       }
